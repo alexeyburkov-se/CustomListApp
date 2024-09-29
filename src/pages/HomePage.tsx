@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { loadList } from "../listLoaders/listLoader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createEmptyListV1 } from "../listLoaders/emptyListLoader";
 
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
@@ -10,7 +11,9 @@ export const HomePage = () => {
     <>Loading</>
   ) : (
     <>
-      <Button>New</Button>
+      <Button onClick={() => navigate(`/lists/${createEmptyListV1()}`)}>
+        New
+      </Button>
       <Button component="label">
         Load
         <input
