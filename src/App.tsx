@@ -3,14 +3,19 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { ListPage } from "./pages/ListPage";
+import { ListPage, ListPlaceholderPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
+import { Suspense } from "react";
 
 const App = () => {
   const mainRouter = createBrowserRouter([
     {
       path: "/list/:listId",
-      element: <ListPage />,
+      element: (
+        <Suspense fallback={<ListPlaceholderPage />}>
+          <ListPage />
+        </Suspense>
+      ),
     },
     {
       path: "/home",
