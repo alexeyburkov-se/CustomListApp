@@ -17,9 +17,7 @@ const App = () => {
     },
     {
       path: "/",
-      loader: () => {
-        throw redirect("/list/new");
-      },
+      loader: () => redirect("/list/new"),
     },
   ]);
   return <RouterProvider router={mainRouter} />;
