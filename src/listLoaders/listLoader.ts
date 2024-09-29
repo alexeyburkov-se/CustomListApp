@@ -1,8 +1,7 @@
 import { load } from "js-yaml";
 import { BaseListShape, ListTypeV1 as ListShapeV1 } from "./listShape";
 
-export enum ListLoadResult {
-  Success,
+export enum ListLoadErrors {
   Error,
   UnknownVersion,
 }
@@ -14,7 +13,7 @@ export type ListLoadResultType =
     }
   | {
       success: false;
-      result: ListLoadResult;
+      result: ListLoadErrors;
     };
 
 const loadListV1 = (data: ListShapeV1): ListLoadResultType => {
