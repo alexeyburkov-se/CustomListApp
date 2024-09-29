@@ -20,7 +20,16 @@ const loadListV1 = (data: ListShapeV1): ListLoadResultType => {
   return { success: true, result: "list1" };
 };
 
-export const loadList = async (file: File): Promise<ListLoadResultType> => {
+const createEmptyList = (): ListLoadResultType => {
+  return { success: true, result: "list1" };
+};
+
+export const loadList = async (
+  file: File | null
+): Promise<ListLoadResultType> => {
+  if (!file) {
+    return createEmptyList();
+  }
   const data = await file.text().then((str) => load(str) as BaseListShape); // todo handle all errors
   switch (data.version) {
     case "1.0.0":
@@ -29,7 +38,3 @@ export const loadList = async (file: File): Promise<ListLoadResultType> => {
       return { success: false, result: ListLoadErrors.UnknownVersion };
   }
 };
-
-export const createEmptyListV1 = () => {
-  return 1;
-}

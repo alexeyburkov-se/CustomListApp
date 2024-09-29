@@ -2,16 +2,26 @@ import { Button } from "@mui/material";
 import { loadList } from "../listLoaders/listLoader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createEmptyListV1 } from "../listLoaders/emptyListLoader";
 
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const loadProcedure = async (file: File | null) => {
+    setLoading(true);
+    const result = await loadList(file);
+    if (result.success) {
+      navigate(`/lists/${result.result}`);
+    } else {
+      // todo show message on error
+    }
+  };
+  
   return isLoading ? (
     <>Loading</>
   ) : (
     <>
-      <Button onClick={() => navigate(`/lists/${createEmptyListV1()}`)}>
+      <Button onClick={async () => loadProcedure(null)}>
         New
       </Button>
       <Button component="label">
@@ -23,13 +33,7 @@ export const HomePage = () => {
               return;
               // todo show message
             }
-            setLoading(true);
-            const result = await loadList(event.target.files[0]);
-            if (result.success) {
-              navigate(`/lists/${result.result}`);
-            } else {
-              // todo show message on error
-            }
+            return loadProcedure(event.target.files[0]);
           }}
         />
       </Button>
