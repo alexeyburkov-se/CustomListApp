@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ListPage } from "./pages/ListPage";
+import { HomePage } from "./pages/HomePage";
 
 const App = () => {
   const mainRouter = createBrowserRouter([
@@ -13,7 +14,7 @@ const App = () => {
     },
     {
       path: "/home",
-      element: <ListPage />,
+      element: <HomePage />,
     },
     {
       path: "/",
