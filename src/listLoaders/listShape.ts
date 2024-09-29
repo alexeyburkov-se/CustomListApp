@@ -9,7 +9,7 @@ export interface BaseListShape {
   version: string;
 }
 
-export interface ListTypeV1 extends BaseListShape {
+export interface ListShapeV1 extends BaseListShape {
   version: "1.0.0";
   main: {
     properties: (

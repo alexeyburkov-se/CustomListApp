@@ -1,5 +1,5 @@
 import { load } from "js-yaml";
-import { BaseListShape, ListTypeV1 as ListShapeV1 } from "./listShape";
+import { BaseListShape, ListShapeV1 } from "./listShape";
 
 export enum ListLoadErrors {
   Error,
