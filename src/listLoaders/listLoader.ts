@@ -1,6 +1,5 @@
 import { load } from "js-yaml";
 import { BaseListShape, ListTypeV1 as ListShapeV1 } from "./listShape";
-import { v4 as randomUuid } from "uuid";
 
 export enum ListLoadResult {
   Success,
@@ -19,7 +18,7 @@ export type ListLoadResultType =
     };
 
 const loadListV1 = (data: ListShapeV1): ListLoadResultType => {
-  return { success: true, result: randomUuid() };
+  return { success: true, result: "list1" };
 };
 
 export const loadList = async (file: File): Promise<ListLoadResultType> => {
@@ -28,6 +27,6 @@ export const loadList = async (file: File): Promise<ListLoadResultType> => {
     case "1.0.0":
       return loadListV1(data as ListShapeV1);
     default:
-      return { success: false, result: ListLoadResult.UnknownVersion };
+      return { success: false, result: ListLoadErrors.UnknownVersion };
   }
 };
