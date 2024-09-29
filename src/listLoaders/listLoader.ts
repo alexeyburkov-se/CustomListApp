@@ -29,3 +29,7 @@ export const loadList = async (file: File): Promise<ListLoadResultType> => {
       return { success: false, result: ListLoadErrors.UnknownVersion };
   }
 };
+
+export const createEmptyListV1 = () => {
+  return 1;
+}
