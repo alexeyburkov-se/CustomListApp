@@ -3,7 +3,7 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { ListPage } from "./pages/listPage";
+import { ListPage } from "./pages/ListPage";
 
 const App = () => {
   const mainRouter = createBrowserRouter([

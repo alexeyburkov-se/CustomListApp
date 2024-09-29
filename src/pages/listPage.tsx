@@ -1,3 +1,3 @@
 export const ListPage = () => {
-    return <>List</>
-}
+  return <>List</>;
+};
