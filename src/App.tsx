@@ -8,11 +8,11 @@ import { ListPage } from "./pages/ListPage";
 const App = () => {
   const mainRouter = createBrowserRouter([
     {
-      path: "/list/item/:listId",
+      path: "/list/:listId",
       element: <ListPage />,
     },
     {
-      path: "/list/new",
+      path: "/home",
       element: <ListPage />,
     },
     {
