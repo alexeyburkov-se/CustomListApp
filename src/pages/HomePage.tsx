@@ -14,7 +14,7 @@ export const HomePage = () => {
               return;
             }
             const result = await loadList(event.target.files[0]);
-            // todo show error on mistake, or redirect on success
+            // todo show message on error, or redirect on success
           }}
         />
       </Button>

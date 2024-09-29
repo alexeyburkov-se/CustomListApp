@@ -12,10 +12,10 @@ const loadListV1 = (data: ListShapeV1): ListLoadResult => {
 }
 
 export const loadList = async (file: File) => {
-    const data = file.text().then(str => load(str) as BaseListShape);
-    switch ((await data).version) {
+    const data = await file.text().then(str => load(str) as BaseListShape);// todo handle all errors
+    switch (data.version) {
         case "1.0.0":
-            return loadListV1(await data as ListShapeV1)
+            return loadListV1(data as ListShapeV1)
         default:
             return ListLoadResult.UnknownVersion
     }
