@@ -1,5 +1,6 @@
 import { load } from "js-yaml";
-import { BaseListShape, ListShapeV1 } from "./listShape";
+import { BaseListShape, ListShapeV1 } from "./fileSchemas";
+import { createNewList } from "../internalData/creationFunctions";
 
 export enum ListLoadErrors {
   Error,
@@ -21,7 +22,6 @@ const loadListV1 = (data: ListShapeV1): ListLoadResultType => {
 };
 
 const createEmptyList = (): ListLoadResultType => {
-  return { success: true, result: "list1" };
 };
 
 export const loadList = async (

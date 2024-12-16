@@ -3,7 +3,7 @@ import {
   NodeStringVariants,
   NodeNumberVariants,
   NodeRatioVariants,
-} from "../listItemComponents/itemComponentProcessor";
+} from "../representationComponents/componentProcessor";
 
 export interface BaseListShape {
   version: string;
