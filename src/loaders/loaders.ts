@@ -22,6 +22,7 @@ const loadListV1 = (data: ListShapeV1): ListLoadResultType => {
 };
 
 const createEmptyList = (): ListLoadResultType => {
+  return { success: true, result: createNewList() };
 };
 
 export const loadList = async (
