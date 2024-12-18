@@ -31,7 +31,7 @@ export const loadList = async (
   if (!file) {
     return createEmptyList();
   }
-  const data = await file.text().then((str) => load(str) as BaseListShape); // todo handle all errors
+  const data = await file.text().then((str) => load(str) as BaseListShape); // todo handle all errors and semantic validation
   switch (data.version) {
     case "1.0.0":
       return loadListV1(data as ListShapeV1);
