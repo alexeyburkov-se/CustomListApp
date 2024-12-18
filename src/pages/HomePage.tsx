@@ -21,9 +21,7 @@ export const HomePage = () => {
     <>Loading</>
   ) : (
     <>
-      <Button onClick={async () => loadProcedure(null)}>
-        New
-      </Button>
+      <Button onClick={async () => loadProcedure(null)}>New</Button>
       <Button component="label">
         Load
         <input

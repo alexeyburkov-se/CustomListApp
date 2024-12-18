@@ -3,5 +3,5 @@ export const ListPage = () => {
 };
 
 export const ListPlaceholderPage = () => {
-   return <>PlaceHolderList</>
-}
+  return <>PlaceHolderList</>;
+};
