@@ -16,7 +16,7 @@ export const HomePage = () => {
       // todo show message on error
     }
   };
-  
+
   return isLoading ? (
     <>Loading</>
   ) : (
