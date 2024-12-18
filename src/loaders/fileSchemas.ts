@@ -10,7 +10,7 @@ export interface BaseListShape {
 }
 
 export interface ListShapeV1 extends BaseListShape {
-  version: "1.0.0";
+  version: "1";
   main: {
     properties: (
       | {
