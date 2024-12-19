@@ -1,36 +1,49 @@
-import {
-  NodeBooleanVariants,
-  NodeStringVariants,
-  NodeNumberVariants,
-  NodeRatioVariants,
-} from "../representationComponents/componentProcessor";
+export enum StringPropTypes {
+  Text = "text",
+  Label = "label",
+  Title = "title",
+  Rating = "rating",
+}
 
-export interface BaseListShape {
+export enum BooleanPropTypes {
+  CheckBox = "checkBox",
+}
+
+export enum NumberPropTypes {
+  Rating = "rating",
+}
+
+export enum RatioPropTypes {
+  RatingRatio = "ratingRatio",
+}
+
+
+export interface BaseListJsonSchema {
   version: string;
 }
 
-export interface ListShapeV1 extends BaseListShape {
+export interface ListJsonSchemaV1 extends BaseListJsonSchema {
   version: "1";
   main: {
     properties: (
       | {
           propName: string;
-          propType: NodeStringVariants;
+          propType: StringPropTypes;
           propValue: string;
         }
       | {
           propName: string;
-          propType: NodeBooleanVariants;
+          propType: BooleanPropTypes;
           propValue: boolean;
         }
       | {
           propName: string;
-          propType: NodeNumberVariants;
+          propType: NumberPropTypes;
           propValue: number;
         }
       | {
           propName: string;
-          propType: NodeRatioVariants;
+          propType: RatioPropTypes;
           propValue: [number, number];
         }
     )[];
