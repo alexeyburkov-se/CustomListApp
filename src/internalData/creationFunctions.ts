@@ -1,13 +1,13 @@
-import { allListsDataKey, AllListsDataShapeV1 } from "./dataSchemas";
+import { allListsDataKey, AllListsDataShapeV1, listDataKey } from "./dataSchemas";
 
 export const createNewList = (): string => {
   const allListsData = JSON.parse(
-    localStorage.getItem(allListsDataKey()) ?? '{"count":"0","lastId":"0"}',
+    localStorage.getItem(allListsDataKey()) ?? '{"v":"1","c":0,"l":0}',
   ) as AllListsDataShapeV1;
   allListsData.c += 1;
   allListsData.l += 1;
-  const listId = `list_${allListsData.l}`;
-  allListsData.listIds.push(listId);
+  const listKey = listDataKey(allListsData.l);
   localStorage.setItem(allListsDataKey(), JSON.stringify(allListsData));
-  return listId;
+  localStorage.setItem(listKey, JSON.stringify('{"v":"1","c":0,"l":0,"n":"New list"}'));
+  return listKey;
 };
