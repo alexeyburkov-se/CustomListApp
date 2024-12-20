@@ -26,15 +26,15 @@ const createEmptyList = (): ListLoadResultType => {
 };
 
 export const loadList = async (
-  file: File | null,
+  file: File | null
 ): Promise<ListLoadResultType> => {
   if (!file) {
     return createEmptyList();
   }
-  const data = await file.text().then((str) => load(str) as BaseListJsonSchema); // todo handle all errors and semantic validation
+  const data = await file.text().then((str) => load(str) as BaseListJsonSchema); // todo handle all errors and semantic validation of schema
   switch (data.version) {
-    case "1.0.0":
-      return loadListV1(data as ListJsonSchemaV1);
+    case "1":
+      return loadListV1(data);
     default:
       return { success: false, result: ListLoadErrors.UnknownVersion };
   }
