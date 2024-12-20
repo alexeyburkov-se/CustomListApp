@@ -1,10 +1,12 @@
 import { load } from "js-yaml";
-import { BaseListJsonSchema, ListJsonSchemaV1 } from "./fileSchemas";
+import { BaseListJsonSchema } from "./fileSchemas";
 import { createNewList } from "../internalData/creationFunctions";
+import { loadListV1 } from "./loaderV1";
 
 export enum ListLoadErrors {
   Error,
   UnknownVersion,
+  InvalidFileSchema,
 }
 
 export type ListLoadResultType =
@@ -17,10 +19,6 @@ export type ListLoadResultType =
       result: ListLoadErrors;
     };
 
-const loadListV1 = (data: ListJsonSchemaV1): ListLoadResultType => {
-  return { success: true, result: "list1" };
-};
-
 const loaderMap = {
   "1": loadListV1,
 } as const;
@@ -29,11 +27,17 @@ const hasLoaderForVersion = (ver: string): ver is keyof typeof loaderMap => {
   return ver in loaderMap;
 };
 
+const validateBaseSchema = (data: unknown): data is BaseListJsonSchema =>
+  typeof data == "object" && data != null && "version" in data;
+
 export const loadList = async (file?: File): Promise<ListLoadResultType> => {
   if (!file) {
     return { success: true, result: createNewList() };
   }
-  const data = await file.text().then((str) => load(str) as BaseListJsonSchema); // todo handle all errors and semantic validation of schema
+  const data = await file.text().then((str) => load(str)); // todo handle all errors
+  if (!validateBaseSchema(data)) {
+    return { success: false, result: ListLoadErrors.InvalidFileSchema };
+  }
   if (!hasLoaderForVersion(data.version)) {
     return { success: false, result: ListLoadErrors.UnknownVersion };
   }

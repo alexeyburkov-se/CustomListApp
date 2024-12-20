@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { loadList } from "../loaders/loaders";
+import { loadList } from "../loaders/mainLoader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
