@@ -21,10 +21,6 @@ const loadListV1 = (data: ListJsonSchemaV1): ListLoadResultType => {
   return { success: true, result: "list1" };
 };
 
-const createEmptyList = (): ListLoadResultType => {
-  return { success: true, result: createNewList() };
-};
-
 const loaderMap = {
   "1": loadListV1,
 } as const;
@@ -35,7 +31,7 @@ const hasLoaderForVersion = (ver: string): ver is keyof typeof loaderMap => {
 
 export const loadList = async (file?: File): Promise<ListLoadResultType> => {
   if (!file) {
-    return createEmptyList();
+    return { success: true, result: createNewList() };
   }
   const data = await file.text().then((str) => load(str) as BaseListJsonSchema); // todo handle all errors and semantic validation of schema
   if (!hasLoaderForVersion(data.version)) {
