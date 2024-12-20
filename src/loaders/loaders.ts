@@ -26,7 +26,7 @@ const createEmptyList = (): ListLoadResultType => {
 };
 
 export const loadList = async (
-  file: File | null
+  file?: File
 ): Promise<ListLoadResultType> => {
   if (!file) {
     return createEmptyList();

@@ -7,7 +7,7 @@ export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const loadProcedure = async (file: File | null) => {
+  const loadProcedure = async (file?: File) => {
     setLoading(true);
     const result = await loadList(file);
     if (result.success) {
@@ -21,7 +21,7 @@ export const HomePage = () => {
     <>Loading</>
   ) : (
     <>
-      <Button onClick={async () => loadProcedure(null)}>New</Button>
+      <Button onClick={async () => loadProcedure()}>New</Button>
       <Button component="label">
         Load
         <input
