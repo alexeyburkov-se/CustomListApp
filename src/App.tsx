@@ -10,7 +10,7 @@ import { Suspense } from "react";
 const App = () => {
   const mainRouter = createBrowserRouter([
     {
-      path: "/list/:listId",
+      path: "/lists/:listId",
       element: (
         <Suspense fallback={<ListPlaceholderPage />}>
           <ListPage />
@@ -23,7 +23,7 @@ const App = () => {
     },
     {
       path: "/",
-      loader: () => redirect("/list/new"),
+      loader: () => redirect("/lists/new"),
     },
   ]);
   return <RouterProvider router={mainRouter} />;
