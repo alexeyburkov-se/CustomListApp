@@ -2,7 +2,6 @@ export enum StringPropTypes {
   Text = "text",
   Label = "label",
   Title = "title",
-  Rating = "rating",
 }
 
 export enum BooleanPropTypes {
@@ -16,7 +15,6 @@ export enum NumberPropTypes {
 export enum RatioPropTypes {
   RatingRatio = "ratingRatio",
 }
-
 
 export interface BaseListJsonSchema {
   version: string;
