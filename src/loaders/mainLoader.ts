@@ -23,12 +23,12 @@ const loaderMap = {
   "1": loadListV1,
 } as const;
 
-const hasLoaderForVersion = (ver: string): ver is keyof typeof loaderMap => {
-  return ver in loaderMap;
+const hasLoaderForVersion = (version: string): version is keyof typeof loaderMap => {
+  return version in loaderMap;
 };
 
 const validateBaseSchema = (data: unknown): data is BaseListJsonSchema =>
-  typeof data == "object" && data != null && "version" in data;
+  typeof data == "object" && data != null && "version" in data && typeof data.version == "string";
 
 export const loadList = async (file?: File): Promise<ListLoadResultType> => {
   if (!file) {
