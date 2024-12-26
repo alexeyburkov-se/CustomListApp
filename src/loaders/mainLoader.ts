@@ -1,7 +1,7 @@
 import { load } from "js-yaml";
-import { BaseListJsonSchema } from "./fileSchemas";
+import { BaseListJsonSchema } from "./baseSchemas";
 import { createNewList } from "../internalData/creationFunctions";
-import { loadListV1 } from "./loaderV1";
+import { loadListV1 } from "./loaderV1/loader";
 
 export enum ListLoadErrors {
   Error,

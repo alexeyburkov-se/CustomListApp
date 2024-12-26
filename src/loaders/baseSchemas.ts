@@ -19,31 +19,3 @@ export type RatioPropTypes = z.infer<typeof ZodValidationRatioPropTypes>;
 export interface BaseListJsonSchema {
   version: string;
 }
-
-export interface ListJsonSchemaV1 extends BaseListJsonSchema {
-  version: "1";
-  main: {
-    properties: (
-      | {
-          propName: string;
-          propType: StringPropTypes;
-          propValue: string;
-        }
-      | {
-          propName: string;
-          propType: BooleanPropTypes;
-          propValue: boolean;
-        }
-      | {
-          propName: string;
-          propType: NumberPropTypes;
-          propValue: number;
-        }
-      | {
-          propName: string;
-          propType: RatioPropTypes;
-          propValue: [number, number];
-        }
-    )[];
-  }[];
-}
