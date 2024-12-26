@@ -1,17 +1,13 @@
-import { BaseListJsonSchema, ListJsonSchemaV1 } from "../baseSchemas";
-import { ListLoadResultType } from "../mainLoader";
-
-const validateListSchemaV1 = (
-  data: BaseListJsonSchema
-): data is ListJsonSchemaV1 => {
-  if (!("main" in data) || !Array.isArray(data.main)) {
-    return false;
-  }
-  data.main
-};
+import { BaseListJsonSchema } from "../baseSchemas";
+import { ListLoadErrors, ListLoadResultType } from "../mainLoader";
+import { ZodValidationListV1 } from "./fileSchema";
 
 export const loadListV1 = (data: BaseListJsonSchema): ListLoadResultType => {
-  // todo validation into ListJsonSchemaV1
+  const result = ZodValidationListV1.safeParse(data);
+  if (!result.success) {
+    // todo: log errors
+    return { success: false, result: ListLoadErrors.InvalidFileSchema };
+  }
   // todo processing
   return { success: true, result: "list1" };
 };
