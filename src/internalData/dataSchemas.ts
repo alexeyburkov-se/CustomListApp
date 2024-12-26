@@ -1,4 +1,4 @@
-import { ListJsonSchemaV1 } from "../loaders/fileSchemas";
+import { ListYamlSchemaV1 } from "../loaders/loaderV1/fileSchema";
 
 export const allListsDataKey = () => "a";
 
@@ -10,8 +10,10 @@ export const listItemDataKey = (listKey: string, itemId: number) =>
 export const listItemPropertyDataKey = (itemKey: string, propId: number) =>
   `${itemKey}p${propId}`;
 
-export const filterItemPropertyKeysByItemKey = (itemKey: string, keys: string[]) =>
-  keys.filter((v) => v.includes(itemKey));
+export const filterItemPropertyKeysByItemKey = (
+  itemKey: string,
+  keys: string[]
+) => keys.filter((v) => v.includes(itemKey));
 
 export const filterItemKeysByListKey = (listKey: string, keys: string[]) =>
   keys.filter((v) => v.includes(listKey));
@@ -48,7 +50,7 @@ export type ConvertItemJsonSchemaToInternalShapeV1<T> = T extends {
   propType: infer U;
   propValue: infer V;
 }
-  ? U extends ListJsonSchemaV1["main"][0]["properties"][0]["propType"]
+  ? U extends ListYamlSchemaV1["main"][0]["properties"][0]["propertyType"]
     ? {
         n: string;
         t: (typeof JsonSchemaItemTypeToInternalItemTypeConverter)[U];
@@ -59,5 +61,5 @@ export type ConvertItemJsonSchemaToInternalShapeV1<T> = T extends {
 
 export type ListItemPropertyDataShapeV1 =
   ConvertItemJsonSchemaToInternalShapeV1<
-    ListJsonSchemaV1["main"][0]["properties"][0]
+    ListYamlSchemaV1["main"][0]["properties"][0]
   >;
