@@ -5,7 +5,7 @@ import { loadListV1 } from "./loaderV1/loader";
 
 export enum ListLoadErrors {
   Error,
-  UnknownVersion,
+  UnknownSchemaVersion,
   InvalidFileSchema,
 }
 
@@ -41,7 +41,7 @@ export const loadList = async (file?: File): Promise<ListLoadResultType> => {
     return { success: false, result: ListLoadErrors.InvalidFileSchema };
   }
   if (!hasLoaderForVersion(validationResult.data.version)) {
-    return { success: false, result: ListLoadErrors.UnknownVersion };
+    return { success: false, result: ListLoadErrors.UnknownSchemaVersion };
   }
   return loaderMap[validationResult.data.version](validationResult.data);
 };
