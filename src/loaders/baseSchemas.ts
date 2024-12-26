@@ -1,20 +1,20 @@
-export enum StringPropTypes {
-  Text = "text",
-  Label = "label",
-  Title = "title",
-}
+import { z } from "zod";
 
-export enum BooleanPropTypes {
-  CheckBox = "checkBox",
-}
+export const ZodValidationStringPropTypes = z.enum(["text", "label", "title"]);
 
-export enum NumberPropTypes {
-  Rating = "rating",
-}
+export type StringPropTypes = z.infer<typeof ZodValidationStringPropTypes>;
 
-export enum RatioPropTypes {
-  RatingRatio = "ratingRatio",
-}
+export const ZodValidationBooleanPropTypes = z.enum(["checkBox"]);
+
+export type BooleanPropTypes = z.infer<typeof ZodValidationBooleanPropTypes>;
+
+export const ZodValidationNumberPropTypes = z.enum(["rating"]);
+
+export type NumberPropTypes = z.infer<typeof ZodValidationNumberPropTypes>;
+
+export const ZodValidationRatioPropTypes = z.enum(["ratingRatio"]);
+
+export type RatioPropTypes = z.infer<typeof ZodValidationRatioPropTypes>;
 
 export interface BaseListJsonSchema {
   version: string;
