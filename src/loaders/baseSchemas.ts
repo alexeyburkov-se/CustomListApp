@@ -16,6 +16,10 @@ export const ZodValidationRatioPropTypes = z.enum(["ratingRatio"]);
 
 export type RatioPropTypes = z.infer<typeof ZodValidationRatioPropTypes>;
 
-export interface BaseListJsonSchema {
-  version: string;
-}
+export const ZodValidationBaseListYamlSchema = z.object({
+  version: z.string(),
+});
+
+export type BaseListYamlSchema = z.infer<
+  typeof ZodValidationBaseListYamlSchema
+>;
