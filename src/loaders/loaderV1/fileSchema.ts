@@ -37,5 +37,3 @@ export const ZodValidationListV1 = z.object({
     })
   ),
 });
-
-export type ListYamlSchemaV1 = z.infer<typeof ZodValidationListV1>;
