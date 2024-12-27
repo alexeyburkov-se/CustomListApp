@@ -1,4 +1,4 @@
-import { ListYamlSchemaV1 } from "../loaders/loaderV1/fileSchema";
+import { z } from "zod";
 
 export const allListsDataKey = () => "a";
 
@@ -18,48 +18,60 @@ export const filterItemPropertyKeysByItemKey = (
 export const filterItemKeysByListKey = (listKey: string, keys: string[]) =>
   keys.filter((v) => v.includes(listKey));
 
-export interface AllListsDataShapeV1 {
-  v: "1";
-  c: number;
-  l: number;
-}
+export const ZodValidationAllListsDataShapeV1 = z.object({
+  v: z.literal("1"),
+  c: z.number().refine((num) => num >= 0),
+  l: z.number().refine((num) => num >= 0),
+});
 
-export interface ListDataShapeV1 {
-  v: "1";
-  n: string;
-  c: number;
-  l: number;
-}
+export const ZodValidationListDataShapeV1 = z.object({
+  v: z.literal("1"),
+  n: z.string(),
+  c: z.number().refine((num) => num >= 0),
+  l: z.number().refine((num) => num >= 0),
+});
 
-export interface ListItemDataShapeV1 {
-  c: number;
-  l: number;
-}
+export const ZodValidationListItemDataShapeV1 = z.object({
+  c: z.number().refine((num) => num >= 0),
+  l: z.number().refine((num) => num >= 0),
+});
 
-export const JsonSchemaItemTypeToInternalItemTypeConverter = {
-  text: 1,
-  label: 2,
-  title: 3,
-  rating: 4,
-  checkBox: 5,
-  ratingRatio: 6,
+export const YamlSchemaItemTypeToInternalItemTypeConverter = {
+  ...({
+    text: 1,
+    label: 2,
+    title: 3,
+  } as const),
+  ...({
+    rating: 4,
+  } as const),
+  ...({
+    checkBox: 5,
+  } as const),
+  ...({
+    ratingRatio: 6,
+  } as const),
 } as const;
 
-export type ConvertItemJsonSchemaToInternalShapeV1<T> = T extends {
-  propName: string;
-  propType: infer U;
-  propValue: infer V;
-}
-  ? U extends ListYamlSchemaV1["main"][0]["properties"][0]["propertyType"]
-    ? {
-        n: string;
-        t: (typeof JsonSchemaItemTypeToInternalItemTypeConverter)[U];
-        v: V;
-      }
-    : never
-  : never;
-
-export type ListItemPropertyDataShapeV1 =
-  ConvertItemJsonSchemaToInternalShapeV1<
-    ListYamlSchemaV1["main"][0]["properties"][0]
-  >;
+export const ZodValidationListItemPropertyDataShapeV1 = z.union([
+  z.object({
+    n: z.string(),
+    t: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+    v: z.string(),
+  }),
+  z.object({
+    n: z.string(),
+    t: z.literal(4),
+    v: z.number(),
+  }),
+  z.object({
+    n: z.string(),
+    t: z.literal(5),
+    v: z.boolean(),
+  }),
+  z.object({
+    n: z.string(),
+    t: z.literal(6),
+    v: z.tuple([z.number(), z.number()]),
+  }),
+]);
