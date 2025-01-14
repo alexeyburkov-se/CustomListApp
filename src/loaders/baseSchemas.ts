@@ -1,13 +1,13 @@
 import { z } from "zod";
 
-export const ZodValidationStringPropTypes = z.enum(["text", "label", "title"]);
+export const StringPropTypesZodValidator = z.enum(["text", "label", "title"]);
 
-export const ZodValidationBooleanPropTypes = z.enum(["checkBox"]);
+export const BooleanPropTypesZodValidator = z.enum(["checkBox"]);
 
-export const ZodValidationNumberPropTypes = z.enum(["rating"]);
+export const NumberPropTypesZodValidator = z.enum(["rating"]);
 
-export const ZodValidationRatioPropTypes = z.enum(["ratingRatio"]);
+export const RatioPropTypesZodValidator = z.enum(["ratingRatio"]);
 
-export const ZodValidationBaseListYamlSchema = z.object({
+export const BaseListYamlSchemaZodValidator = z.object({
   version: z.string(),
 });

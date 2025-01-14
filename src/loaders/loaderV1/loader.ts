@@ -1,8 +1,8 @@
 import { ListLoadErrors, ListLoadResultType } from "../mainLoader";
-import { ZodValidationListV1 } from "./fileSchema";
+import { ListV1ZodValidator } from "./fileSchema";
 
 export const loadListV1 = (data: unknown): ListLoadResultType => {
-  const result = ZodValidationListV1.safeParse(data);
+  const result = ListV1ZodValidator.safeParse(data);
   if (!result.success) {
     // todo log errors
     return { success: false, result: ListLoadErrors.InvalidFileSchema };

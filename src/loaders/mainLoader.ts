@@ -1,5 +1,5 @@
 import { load } from "js-yaml";
-import { ZodValidationBaseListYamlSchema } from "./baseSchemas";
+import { BaseListYamlSchemaZodValidator } from "./baseSchemas";
 import { createNewList } from "../internalData/creationFunctions";
 import { loadListV1 } from "./loaderV1/loader";
 
@@ -36,7 +36,7 @@ export const loadList = async (file?: File): Promise<ListLoadResultType> => {
   const validationResult = await file
     .text()
     .then((text) => load(text))
-    .then((data) => ZodValidationBaseListYamlSchema.safeParseAsync(data)); // todo handle all errors
+    .then((data) => BaseListYamlSchemaZodValidator.safeParseAsync(data)); // todo handle all errors
   if (!validationResult.success) {
     return { success: false, result: ListLoadErrors.InvalidFileSchema };
   }

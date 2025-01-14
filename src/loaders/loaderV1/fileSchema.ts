@@ -1,39 +1,11 @@
 import { z } from "zod";
-import {
-  ZodValidationBooleanPropTypes,
-  ZodValidationNumberPropTypes,
-  ZodValidationRatioPropTypes,
-  ZodValidationStringPropTypes,
-} from "../baseSchemas";
+import { ListItemPropertyV1ZodValidatorGen } from "../../misc/supportStructures";
 
-export const ZodValidationListV1 = z.object({
+export const ListV1ZodValidator = z.object({
   version: z.literal("1"),
   main: z.array(
     z.object({
-      properties: z.array(
-        z.union([
-          z.object({
-            propertyName: z.string(),
-            propertyType: ZodValidationStringPropTypes,
-            propertyValue: z.string(),
-          }),
-          z.object({
-            propertyName: z.string(),
-            propertyType: ZodValidationBooleanPropTypes,
-            propertyValue: z.boolean(),
-          }),
-          z.object({
-            propertyName: z.string(),
-            propertyType: ZodValidationNumberPropTypes,
-            propertyValue: z.number(),
-          }),
-          z.object({
-            propertyName: z.string(),
-            propertyType: ZodValidationRatioPropTypes,
-            propertyValue: z.tuple([z.number(), z.number()]),
-          }),
-        ])
-      ),
+      properties: z.array(ListItemPropertyV1ZodValidatorGen.yaml),
     })
   ),
 });
