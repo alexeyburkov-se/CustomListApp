@@ -11,7 +11,7 @@ export const HomePage = () => {
     setLoading(true);
     const result = await loadList(file);
     if (result.success) {
-      navigate(`/lists/${result.result}`);
+      navigate("/list");
     } else {
       // todo show message on error
     }
