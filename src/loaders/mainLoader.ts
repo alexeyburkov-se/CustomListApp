@@ -24,7 +24,7 @@ const loaderMap = {
 } as const;
 
 const hasLoaderForVersion = (
-  version: string
+  version: string,
 ): version is keyof typeof loaderMap => {
   return version in loaderMap;
 };

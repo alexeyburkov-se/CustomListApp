@@ -9,7 +9,7 @@ export const listItemPropertyDataKeyV1 = (itemKey: string, propId: number) =>
 
 export const filterItemPropertyKeysByItemKey = (
   itemKey: string,
-  keys: string[]
+  keys: string[],
 ) => keys.filter((key) => key.includes(itemKey));
 
 export const filterItemKeysByListKey = (listKey: string, keys: string[]) =>

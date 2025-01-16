@@ -6,6 +6,6 @@ export const ListV1ZodValidator = z.object({
   main: z.array(
     z.object({
       properties: z.array(ListItemPropertyV1ZodValidatorGen.yaml),
-    })
+    }),
   ),
 });
