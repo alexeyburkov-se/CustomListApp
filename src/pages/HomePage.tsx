@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { loadList } from "../loaders/mainLoader";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
