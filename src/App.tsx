@@ -1,32 +1,29 @@
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
-import { ListPage, ListPlaceholderPage } from "./pages/ListPage";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router";
+import { ListPage } from "./pages/listPage";
 import { HomePage } from "./pages/HomePage";
-import { Suspense } from "react";
+import { ListDataProvider } from "./misc/listDataContext";
 
-const App = () => {
-  const mainRouter = createBrowserRouter([
-    {
-      path: "/list",
-      element: (
-        <Suspense fallback={<ListPlaceholderPage />}>
-          <ListPage />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/home",
-      element: <HomePage />,
-    },
-    {
-      path: "/",
-      loader: () => redirect("/home"),
-    },
-  ]);
-  return <RouterProvider router={mainRouter} />;
-};
+const mainRouter = createBrowserRouter([
+  {
+    path: "/list",
+    element: <ListPage />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
+  },
+  {
+    path: "/",
+    loader: () => redirect("/home"),
+  },
+]);
+
+// todo improve loading with suspense
+
+const App = () => (
+  <ListDataProvider>
+    <RouterProvider router={mainRouter} />
+  </ListDataProvider>
+);
 
 export default App;
