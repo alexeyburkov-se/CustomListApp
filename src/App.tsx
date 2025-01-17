@@ -1,5 +1,5 @@
 import { createBrowserRouter, redirect, RouterProvider } from "react-router";
-import { ListPage } from "./pages/listPage";
+import { ListPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
 import { ListDataProvider } from "./misc/listDataContext";
 
