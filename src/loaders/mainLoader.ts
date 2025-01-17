@@ -1,7 +1,7 @@
 import { load } from "js-yaml";
 import { BaseListYamlSchemaZodValidator } from "./baseSchemas";
-import { createNewList } from "../internalData/creationFunctions";
-import { loadListV1 } from "./loaderV1/loader";
+import { ListDataV1Type, loadListV1 } from "./loaderV1/loader";
+import { emptyListV1 } from "./loaderV1/fileSchema";
 
 export enum ListLoadErrors {
   Error,
@@ -9,10 +9,14 @@ export enum ListLoadErrors {
   InvalidFileSchema,
 }
 
-export type ListLoadResultType =
+export type ListDataType = ListDataV1Type;
+
+const emptyList = emptyListV1;
+
+export type ListLoadResultType<T> =
   | {
       success: true;
-      result: string;
+      result: T;
     }
   | {
       success: false;
@@ -29,9 +33,9 @@ const hasLoaderForVersion = (
   return version in loaderMap;
 };
 
-export const loadList = async (file?: File): Promise<ListLoadResultType> => {
+export const loadList = async (file?: File): Promise<ListLoadResultType<ListDataType>> => {
   if (!file) {
-    return { success: true, result: createNewList() };
+    return { success: true, result: emptyList };
   }
   const validationResult = await file
     .text()
