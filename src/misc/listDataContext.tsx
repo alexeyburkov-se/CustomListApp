@@ -1,22 +1,23 @@
-import { z } from "zod";
-import { ListV1ZodValidator } from "../loaders/loaderV1/fileSchema";
 import { createContext, useContext, useState } from "react";
+import { ListDataType } from "../loaders/mainLoader";
 
-type ListDataType = z.infer<typeof ListV1ZodValidator>;
+type ProvideListDataContext = [
+  ListDataType | null,
+  (d: ListDataType) => void,
+  () => void,
+];
 
-interface ProvideListDataContext {
-  data: ListDataType | null;
-  set: (d: ListDataType) => void;
-  reset: () => void;
-}
-
-const ListDataContext = createContext<ProvideListDataContext | null>(null);
+const ListDataContext = createContext<ProvideListDataContext>([
+  null,
+  () => ({}),
+  () => ({}),
+]);
 
 export const ListDataProvider = ({ children }: { children: JSX.Element }) => {
   const [data, set] = useState<ListDataType | null>(null);
 
   return (
-    <ListDataContext.Provider value={{ data, set, reset: () => set(null) }}>
+    <ListDataContext.Provider value={[data, set, () => set(null)]}>
       {children}
     </ListDataContext.Provider>
   );
