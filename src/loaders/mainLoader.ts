@@ -1,17 +1,14 @@
 import { load } from "js-yaml";
 import { BaseListYamlSchemaZodValidator } from "./baseSchemas";
-import { ListDataV1Type, loadListV1 } from "./loaderV1/loader";
-import { emptyListV1 } from "./loaderV1/fileSchema";
+import { loadListV1 } from "./loaderV1/loader";
+import { ListV1ZodValidator } from "./loaderV1/fileSchema";
+import { z } from "zod";
 
 export enum ListLoadErrors {
   Error,
   UnknownSchemaVersion,
   InvalidFileSchema,
 }
-
-export type ListDataType = ListDataV1Type;
-
-const emptyList = emptyListV1;
 
 export type ListLoadResultType<T> =
   | {
@@ -33,7 +30,16 @@ const hasLoaderForVersion = (
   return version in loaderMap;
 };
 
-export const loadList = async (file?: File): Promise<ListLoadResultType<ListDataType>> => {
+export const ListZodValidator = ListV1ZodValidator;
+export type ListType = z.infer<typeof ListZodValidator>;
+const emptyList = {
+  version: "1",
+  main: [],
+} as ListType;
+
+export const loadList = async (
+  file?: File,
+): Promise<ListLoadResultType<ListType>> => {
   if (!file) {
     return { success: true, result: emptyList };
   }

@@ -9,8 +9,3 @@ export const ListV1ZodValidator = z.object({
     }),
   ),
 });
-
-export const emptyListV1 = {
-  version: "1",
-  main: [],
-} as z.infer<typeof ListV1ZodValidator>;
