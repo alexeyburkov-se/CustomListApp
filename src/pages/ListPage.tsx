@@ -1,16 +1,15 @@
-import { useEffect } from "react";
-import { useListData } from "../misc/listDataContext";
-import { useNavigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
+import { z } from "zod";
+import { ListZodValidator } from "../loaders/mainLoader";
+
+const LocationValidator = z.object({
+  listData: ListZodValidator
+})
 
 export const ListPage = () => {
-  const [data] = useListData();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!data) navigate("/home");
-  });
-
-  return data ? <>List</> : <>Redirecting</>;
+  const data = useLocation();
+  const validationResult = LocationValidator.safeParse(data.state);
+  return validationResult.success ? <>List</> : <Navigate to={"/home"} replace={true}/>;
 };
 
 export const ListPlaceholderPage = () => {
