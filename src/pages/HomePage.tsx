@@ -2,19 +2,17 @@ import { Button } from "@mui/material";
 import { loadList } from "../loaders/mainLoader";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useListData } from "../misc/listDataContext";
 
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [, setListData] = useListData();
 
   const loadProcedure = async (file?: File) => {
     setLoading(true);
     const result = await loadList(file);
     if (result.success) {
-      setListData(result.result);
-      navigate("/list");
+      navigate("/list", { state: { listData: result.result } });
+      // todo probably set loading false
     } else {
       // todo show message on error
     }
