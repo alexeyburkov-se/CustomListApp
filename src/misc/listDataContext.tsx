@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { ListDataType } from "../loaders/mainLoader";
+import { ListType } from "../loaders/mainLoader";
 
 type ProvideListDataContext = [
-  ListDataType | null,
-  (d: ListDataType) => void,
+  ListType | null,
+  (d: ListType) => void,
   () => void,
 ];
 
@@ -13,8 +13,8 @@ const ListDataContext = createContext<ProvideListDataContext>([
   () => ({}),
 ]);
 
-export const ListDataProvider = ({ children }: { children: JSX.Element }) => {
-  const [data, set] = useState<ListDataType | null>(null);
+export const ListDataProvider = ({ children }: { children?: JSX.Element }) => {
+  const [data, set] = useState<ListType | null>(null);
 
   return (
     <ListDataContext.Provider value={[data, set, () => set(null)]}>

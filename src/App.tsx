@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect, RouterProvider } from "react-router";
 import { ListPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
+import { ListDataProvider } from "./misc/listDataContext";
 
 const mainRouter = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const mainRouter = createBrowserRouter([
   },
 ]);
 
-const App = () => <RouterProvider router={mainRouter} />;
+const App = () => (
+  <ListDataProvider>
+    <RouterProvider router={mainRouter} />
+  </ListDataProvider>
+);
 
 export default App;

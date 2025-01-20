@@ -1,9 +1,8 @@
-import { Navigate, useLocation } from "react-router";
-import { z } from "zod";
-import { ListType, ListZodValidator } from "../loaders/mainLoader";
-import { useState } from "react";
+import { Navigate } from "react-router";
+import { ListType } from "../loaders/mainLoader";
 import { useFieldArray, useForm } from "react-hook-form";
 import { ListItemComponent } from "../components/ListItemComponent";
+import { useListData } from "../misc/listDataContext";
 
 const ListPageInternal = ({ data }: { data: ListType }) => {
   const { control } = useForm<ListType>({
@@ -22,17 +21,10 @@ const ListPageInternal = ({ data }: { data: ListType }) => {
   );
 };
 
-const LocationValidator = z.object({
-  listData: ListZodValidator,
-});
-
 export const ListPage = () => {
-  const data = useLocation();
-  const [validationResult] = useState(() =>
-    LocationValidator.safeParse(data.state),
-  );
-  return validationResult.success ? (
-    <ListPageInternal data={validationResult.data.listData} />
+  const [listData] = useListData();
+  return listData ? (
+    <ListPageInternal data={listData} />
   ) : (
     <Navigate to={"/home"} replace />
   );
