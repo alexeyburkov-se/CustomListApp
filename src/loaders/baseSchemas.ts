@@ -8,6 +8,8 @@ export const NumberPropTypesZodValidator = z.enum(["rating"]);
 
 export const RatioPropTypesZodValidator = z.enum(["ratingRatio"]);
 
-export const BaseListYamlSchemaZodValidator = z.object({
-  version: z.string(),
-});
+export const BaseListYamlSchemaZodValidator = z
+  .object({
+    version: z.string(),
+  })
+  .passthrough();
