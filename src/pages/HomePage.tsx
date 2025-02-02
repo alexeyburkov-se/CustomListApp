@@ -4,6 +4,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useListData } from "../misc/listDataContext";
 
+const hiddenStyle = {
+  clipPath: "rect(0 0 0 0)",
+  height: 1,
+  width: 1,
+};
+
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const [, setListData] = useListData();
@@ -23,11 +29,12 @@ export const HomePage = () => {
   return isLoading ? (
     <>Loading</>
   ) : (
-    <>
+    <div>
       <Button onClick={async () => loadProcedure()}>New</Button>
       <Button component="label">
         Load
         <input
+          style={hiddenStyle}
           type="file"
           onChange={async (event) => {
             if (!event.target.files || event.target.files.length == 0) {
@@ -38,6 +45,6 @@ export const HomePage = () => {
           }}
         />
       </Button>
-    </>
+    </div>
   );
 };
