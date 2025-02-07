@@ -5,6 +5,7 @@ import {
   NumberPropTypesZodValidator,
   RatioPropTypesZodValidator,
 } from "../loaders/baseSchemas";
+import { isDecimal } from "validator";
 
 export const ListItemPropertyV1ZodValidatorGen = {
   yaml: z.union([
@@ -21,12 +22,15 @@ export const ListItemPropertyV1ZodValidatorGen = {
     z.object({
       propertyName: z.string(),
       propertyType: NumberPropTypesZodValidator,
-      propertyValue: z.number(),
+      propertyValue: z.string().refine(isDecimal),
     }),
     z.object({
       propertyName: z.string(),
       propertyType: RatioPropTypesZodValidator,
-      propertyValue: z.tuple([z.number(), z.number()]),
+      propertyValue: z.tuple([
+        z.string().refine(isDecimal),
+        z.string().refine(isDecimal),
+      ]),
     }),
   ]),
   internal: z.union([
