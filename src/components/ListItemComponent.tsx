@@ -1,15 +1,9 @@
 import { Control, useFieldArray } from "react-hook-form";
 import { ListType } from "../loaders/mainLoader";
-import {
-  Box,
-  Button,
-  Collapse,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Collapse, Paper, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { ItemPropertyComponent } from "./ItemPropertyComponent";
 // todo add darkening of content
 // todo add hover animation for collapse
 
@@ -34,9 +28,9 @@ export const ListItemComponent = ({
         collapsedSize={"3em"}
         onClick={() => !expanded && setExpanded(true)}
       >
-        <Stack>
-          <Box sx={{display: "flex"}}>
-            <Typography sx={{flex: 1}}>Title</Typography>
+        <Stack spacing={1}>
+          <Box sx={{ display: "flex" }}>
+            <Typography sx={{ flex: 1 }}>Title</Typography>
             <Box>
               <Button onClick={() => expanded && setExpanded(false)}>
                 <KeyboardArrowDown
@@ -58,8 +52,12 @@ export const ListItemComponent = ({
               </Button>
             </Box>
           </Box>
-          {fields.map((field, index) => (
-            <div key={index}>prop {index}</div>
+          {fields.map((field) => (
+            <ItemPropertyComponent
+              key={field.id}
+              data={field}
+              control={control}
+            />
           ))}
         </Stack>
       </Collapse>
