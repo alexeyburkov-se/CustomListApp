@@ -7,6 +7,8 @@ export const supportedSeparators = {
 
 export type SeparatorType = keyof typeof supportedSeparators;
 
+export const fallbackSeparator = "language";
+
 export const supportedLanguages = {
   "en-US": "English (USA)",
   "ru-RU": "Русский",
@@ -14,4 +16,4 @@ export const supportedLanguages = {
 
 export type LanguageCode = keyof typeof supportedLanguages;
 
-export const fallBackLanguage = "en-US";
+export const fallbackLanguage = "en-US";

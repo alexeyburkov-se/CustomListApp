@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import {
-  fallBackLanguage,
+  fallbackLanguage,
+  fallbackSeparator,
   LanguageCode,
   SeparatorType,
   supportedLanguages,
@@ -40,8 +41,8 @@ export const MainAppBar = () => {
   const [separator, setSeparator] = useState(getDecimalSeparator());
   return (
     <ListDataProvider defaultValue={null}>
-      <LanguageProvider defaultValue={language ?? fallBackLanguage}>
-        <DecimalSeparatorProvider defaultValue={separator ?? "language"}>
+      <LanguageProvider defaultValue={language ?? fallbackLanguage}>
+        <DecimalSeparatorProvider defaultValue={separator ?? fallbackSeparator}>
           <Outlet />
         </DecimalSeparatorProvider>
       </LanguageProvider>
