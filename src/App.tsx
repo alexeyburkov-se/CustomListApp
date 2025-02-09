@@ -1,11 +1,12 @@
 import { createBrowserRouter, redirect, RouterProvider } from "react-router";
 import { ListPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
-import { ListDataProvider } from "./misc/listDataContext";
+import { MainAppBar } from "./components/MainAppBar";
 
 const mainRouter = createBrowserRouter([
   {
     path: "/",
+    element: <MainAppBar />,
     children: [
       {
         index: true,
@@ -24,10 +25,6 @@ const mainRouter = createBrowserRouter([
   },
 ]);
 
-const App = () => (
-  <ListDataProvider>
-    <RouterProvider router={mainRouter} />
-  </ListDataProvider>
-);
+const App = () => <RouterProvider router={mainRouter} />;
 
 export default App;
