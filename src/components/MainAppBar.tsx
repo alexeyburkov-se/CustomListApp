@@ -17,6 +17,7 @@ import {
   DecimalSeparatorProvider,
   separatorStorageKey,
 } from "../misc/contexts/decimalSeparatorContext";
+import { DecimalSeparatorAlert, LanguageAlert } from "./PopupAlerts";
 
 const getLanguage = (): LanguageCode | null => {
   const lang = localStorage.getItem(languageStorageKey);
@@ -39,11 +40,14 @@ const getDecimalSeparator = (): SeparatorType | null => {
 export const MainAppBar = () => {
   const [language, setLanguage] = useState(getLanguage());
   const [separator, setSeparator] = useState(getDecimalSeparator());
+
   return (
     <ListDataProvider defaultValue={null}>
       <LanguageProvider defaultValue={language ?? fallbackLanguage}>
         <DecimalSeparatorProvider defaultValue={separator ?? fallbackSeparator}>
           <Outlet />
+          <LanguageAlert open={!language} onClose={() => setLanguage("en-US")} alternativeAction={() => ({})} />
+          <DecimalSeparatorAlert open={!!language && !separator} onClose={() => setSeparator("language")} alternativeAction={() => ({})} />
         </DecimalSeparatorProvider>
       </LanguageProvider>
     </ListDataProvider>
