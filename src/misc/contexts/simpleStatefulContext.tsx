@@ -1,6 +1,6 @@
-import { createContext, FunctionComponent, useContext, useState } from "react";
+import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
 
-export interface ProviderInputProps<StateType> { children?: JSX.Element; defaultValue: StateType }
+export type ProviderInputProps<StateType> = PropsWithChildren<{ defaultValue: StateType }>
 
 export const createSimpleStatefulContext = <ContextType, StateType>(
   defaultContextValue: ContextType,
