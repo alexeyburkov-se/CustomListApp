@@ -30,7 +30,7 @@ export const LanguageAlert = ({
 }) => {
   const [language, setLanguage] = useLanguage();
 
-  const handleLangAlertClose = (
+  const handleAlertClose = (
     _event: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
   ) => {
@@ -44,7 +44,7 @@ export const LanguageAlert = ({
     <Snackbar
       open={open}
       autoHideDuration={languageAlertDuration}
-      onClose={handleLangAlertClose}
+      onClose={handleAlertClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       TransitionComponent={SlideTransition}
     >
@@ -84,7 +84,7 @@ export const DecimalSeparatorAlert = ({
 }) => {
   const [separator, setSeparator] = useDecimalSeparator();
 
-  const handleSepAlertClose = (
+  const handleAlertClose = (
     _event: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
   ) => {
@@ -98,7 +98,7 @@ export const DecimalSeparatorAlert = ({
     <Snackbar
       open={open}
       autoHideDuration={separatorAlertDuration}
-      onClose={handleSepAlertClose}
+      onClose={handleAlertClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       TransitionComponent={SlideTransition}
     >
