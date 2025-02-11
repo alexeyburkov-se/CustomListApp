@@ -9,8 +9,8 @@ import {
   SnackbarCloseReason,
 } from "@mui/material";
 import {
-  languageFallbackAlertDuration,
-  separatorFallbackAlertDuration,
+  languageAlertDuration,
+  separatorAlertDuration,
 } from "../misc/constants";
 import { useLanguage } from "../misc/contexts/languageContext";
 import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
@@ -43,7 +43,7 @@ export const LanguageAlert = ({
   return (
     <Snackbar
       open={open}
-      autoHideDuration={languageFallbackAlertDuration}
+      autoHideDuration={languageAlertDuration}
       onClose={handleLangAlertClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       TransitionComponent={SlideTransition}
@@ -97,7 +97,7 @@ export const DecimalSeparatorAlert = ({
   return (
     <Snackbar
       open={open}
-      autoHideDuration={separatorFallbackAlertDuration}
+      autoHideDuration={separatorAlertDuration}
       onClose={handleSepAlertClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       TransitionComponent={SlideTransition}

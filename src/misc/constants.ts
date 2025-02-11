@@ -18,5 +18,5 @@ export type LanguageCode = keyof typeof supportedLanguages;
 
 export const fallbackLanguage = "en-US";
 
-export const languageFallbackAlertDuration = 10000;
-export const separatorFallbackAlertDuration = 10000;
+export const languageAlertDuration = 10000;
+export const separatorAlertDuration = 10000;
