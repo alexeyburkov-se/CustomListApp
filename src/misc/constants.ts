@@ -2,9 +2,9 @@ import USACountryFlag from "../assets/countries/usa.svg?react";
 import RussiaCountryFlag from "../assets/countries/ru.svg?react";
 
 export const supportedSeparators = {
-  comma: ",",
-  dot: ".",
-  arabicComma: "٫",
+  comma: "1234,5678",
+  dot: "1234.5678",
+  arabicComma: "1234٫5678",
   language: "defined by language",
 } as const;
 
