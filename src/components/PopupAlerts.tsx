@@ -178,7 +178,7 @@ export const LanguageAlert = ({
                 onClose();
               }}
             >
-              <ListItemIcon>{val[1].icon({})}</ListItemIcon>
+              <ListItemIcon>{val[1].icon}</ListItemIcon>
               {val[1].name}
             </MenuItem>
           ))}
