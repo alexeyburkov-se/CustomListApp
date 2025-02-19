@@ -50,11 +50,11 @@ export const MainAppBar = () => {
           <Outlet />
           <LanguageAlert
             open={!foundLanguage}
-            onClose={() => setFoundLanguage("en-US")}
+            onClose={() => setFoundLanguage(fallbackLanguage)}
           />
           <DecimalSeparatorAlert
             open={!!foundLanguage && !foundSeparator}
-            onClose={() => setFoundSeparator("language")}
+            onClose={() => setFoundSeparator(fallbackSeparator)}
           />
         </DecimalSeparatorProvider>
       </LanguageProvider>
