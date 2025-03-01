@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import {
   fallbackLanguage,
   fallbackSeparator,
+  githubURL,
   LanguageCode,
   SeparatorType,
   supportedLanguages,
@@ -18,6 +19,9 @@ import {
   separatorStorageKey,
 } from "../misc/contexts/decimalSeparatorContext";
 import { DecimalSeparatorAlert, LanguageAlert } from "./PopupAlerts";
+import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
+import { GitHub, Settings } from "@mui/icons-material";
+import { SettingsDrawer } from "./SettingsDrawer";
 
 const getLanguage = (): LanguageCode | null => {
   const lang = localStorage.getItem(languageStorageKey);
@@ -38,8 +42,21 @@ const getDecimalSeparator = (): SeparatorType | null => {
 };
 
 export const MainAppBar = () => {
-  const [foundLanguage, setFoundLanguage] = useState(getLanguage());
-  const [foundSeparator, setFoundSeparator] = useState(getDecimalSeparator());
+  const [foundLanguage, setFoundLanguage] = useState(getLanguage);
+  const [foundSeparator, setFoundSeparator] = useState(getDecimalSeparator);
+
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+    setSettingsOpen((prev) => !prev);
+  };
 
   return (
     <ListDataProvider defaultValue={null}>
@@ -47,7 +64,23 @@ export const MainAppBar = () => {
         <DecimalSeparatorProvider
           defaultValue={foundSeparator ?? fallbackSeparator}
         >
+          <AppBar position="fixed">
+            <Toolbar>
+              <Box
+                sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}
+              >
+                <IconButton href={githubURL} target="_blank">
+                  <GitHub />
+                </IconButton>
+                <IconButton onClick={toggleDrawer}>
+                  <Settings />
+                </IconButton>
+              </Box>
+            </Toolbar>
+          </AppBar>
+          <Toolbar />
           <Outlet />
+          <SettingsDrawer open={settingsOpen} onClose={toggleDrawer} />
           <LanguageAlert
             open={!foundLanguage}
             onClose={() => setFoundLanguage(fallbackLanguage)}
