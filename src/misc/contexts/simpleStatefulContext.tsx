@@ -1,16 +1,21 @@
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
+import {
+  createContext,
+  FunctionComponent,
+  PropsWithChildren,
+  useContext,
+  useState,
+} from "react";
 
-export type ProviderInputProps<StateType> = PropsWithChildren<{ defaultValue: StateType }>
+export type ProviderInputProps<StateType> = PropsWithChildren<{
+  defaultValue: StateType;
+}>;
 
 export const createSimpleStatefulContext = <ContextType, StateType>(
   defaultContextValue: ContextType,
   state2ContextConverter: (
     arg: [StateType, React.Dispatch<React.SetStateAction<StateType>>],
   ) => ContextType,
-): [
-  FunctionComponent<ProviderInputProps<StateType>>,
-  () => ContextType,
-] => {
+): [FunctionComponent<ProviderInputProps<StateType>>, () => ContextType] => {
   const Context = createContext<ContextType>(defaultContextValue);
 
   const Provider = ({

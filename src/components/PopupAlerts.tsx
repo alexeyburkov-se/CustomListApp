@@ -34,7 +34,7 @@ import {
 } from "react";
 
 interface ParentRefParam {
-  parentRef: RefObject<HTMLElement>
+  parentRef: RefObject<HTMLElement>;
 }
 
 interface BasePopperProps extends ParentRefParam {
@@ -62,7 +62,7 @@ const BaseAlert = ({
   Primary: ReactNode;
   Secondary: FunctionComponent<ParentRefParam>;
 }) => {
-  const snackbarRef = createRef<HTMLElement>()
+  const snackbarRef = createRef<HTMLElement>();
 
   const handleAlertClose = (
     _event: React.SyntheticEvent | Event,
@@ -104,13 +104,15 @@ const BasePopper = ({
 }: PropsWithChildren<BasePopperProps>) => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const alternativeOpen = Boolean(anchorElement);
-  const [zIndex, setZIndex] = useState(0)
+  const [zIndex, setZIndex] = useState(0);
 
   const toggleAnchor = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (alternativeOpen) {
       setAnchorElement(null);
     } else {
-      setZIndex(Number(parentRef?.current?.computedStyleMap().get("z-index") ?? 0))
+      setZIndex(
+        Number(parentRef?.current?.computedStyleMap().get("z-index") ?? 0),
+      );
       setAnchorElement(event.currentTarget);
     }
   };

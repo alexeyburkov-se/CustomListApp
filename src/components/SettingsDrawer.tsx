@@ -54,7 +54,7 @@ const RightAlignListItem = styled(ListItem)(() => ({
 
 const NoVerticalPaddingListItem = styled(ListItem)(() => ({
   paddingTop: "0",
-  paddingBottom: "0"
+  paddingBottom: "0",
 }));
 
 const SettingsSelect = styled(Select)(() => ({
