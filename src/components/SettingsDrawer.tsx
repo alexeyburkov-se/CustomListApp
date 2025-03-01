@@ -35,10 +35,10 @@ import {
 import DecimalSeparator from "../assets/decimalPoint.svg?react";
 import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
 
-const StyledDrawer = styled(Drawer)(() => ({
+const StyledDrawer = styled(Drawer)(({theme}) => ({
   ".MuiDrawer-paper": {
     borderRadius: "10px 0 0 10px",
-    // background: "rgba(256, 256, 256, 0.79)",
+    backgroundColor: theme.palette.mode == "light" ? "rgba(256, 256, 256, 0.8)" : "rgba(18, 18, 18, 0.8)",
   },
 }));
 
