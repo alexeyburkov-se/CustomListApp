@@ -1,6 +1,7 @@
 import {
   Brightness5,
   Brightness7,
+  Close,
   Palette,
   Settings,
   SettingsBrightness,
@@ -24,6 +25,7 @@ import {
   styled,
   SelectProps,
   DrawerProps,
+  IconButton,
 } from "@mui/material";
 import { useLanguage } from "../misc/contexts/languageContext";
 import {
@@ -132,6 +134,9 @@ export const SettingsDrawer = ({
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
           </ListItemText>
+            <IconButton onClick={onClose}>
+              <Close/>
+            </IconButton>
         </ListItem>
         <Divider />
         <NoVerticalPaddingListItem>
