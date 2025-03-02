@@ -26,6 +26,8 @@ import {
   SelectProps,
   DrawerProps,
   IconButton,
+  SxProps,
+  Theme,
   Box,
 } from "@mui/material";
 import { useLanguage } from "../misc/contexts/languageContext";
@@ -38,10 +40,13 @@ import {
 import DecimalSeparator from "../assets/decimalPoint.svg?react";
 import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
 
-const StyledDrawer = styled(Drawer)(({theme}) => ({
+const StyledDrawer = styled(Drawer)(({ theme }) => ({
   ".MuiDrawer-paper": {
     borderRadius: "10px 0 0 10px",
-    backgroundColor: theme.palette.mode == "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(18, 18, 18, 0.8)",
+    backgroundColor:
+      theme.palette.mode == "light"
+        ? "rgba(255, 255, 255, 0.8)"
+        : "rgba(18, 18, 18, 0.8)",
   },
 }));
 
@@ -49,20 +54,24 @@ const RightStyledDrawer = (props: Omit<DrawerProps, "anchor">) => (
   <StyledDrawer {...props} anchor="right" />
 );
 
+const SettingsList = styled(List)({
+  paddingTop: "0",
+});
+
 const RightAlignBox = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
   flexDirection: "row",
 });
 
-const NoVerticalPaddingListItem = styled(ListItem)(() => ({
+const NoVerticalPaddingListItem = styled(ListItem)({
   paddingTop: "0",
   paddingBottom: "0",
-}));
+});
 
-const SettingsSelect = styled(Select)(() => ({
+const SettingsSelect = styled(Select)({
   width: "205px",
-}));
+});
 
 const SmallSettingsSelect = (props: Omit<SelectProps, "size">) => {
   return <SettingsSelect {...props} size="small" />;
@@ -118,26 +127,28 @@ const ThemeButtonGroup = ({
 export const SettingsDrawer = ({
   open,
   onClose,
+  titleElementStyle,
 }: {
   open: boolean;
   onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  titleElementStyle: SxProps<Theme>;
 }) => {
   const [language, setLanguage] = useLanguage();
   const [separator, setSeparator] = useDecimalSeparator();
 
   return (
     <RightStyledDrawer open={open} onClose={onClose}>
-      <List>
-        <ListItem>
+      <SettingsList>
+        <ListItem sx={titleElementStyle}>
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
           </ListItemText>
-            <IconButton onClick={onClose}>
-              <Close/>
-            </IconButton>
+          <IconButton onClick={onClose}>
+            <Close />
+          </IconButton>
         </ListItem>
         <Divider />
         <NoVerticalPaddingListItem>
@@ -202,7 +213,7 @@ export const SettingsDrawer = ({
         >
           <ThemeButtonGroup {...useColorScheme()} />
         </ListItem>
-      </List>
+      </SettingsList>
     </RightStyledDrawer>
   );
 };

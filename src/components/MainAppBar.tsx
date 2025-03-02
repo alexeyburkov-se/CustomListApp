@@ -41,6 +41,8 @@ const getDecimalSeparator = (): SeparatorType | null => {
     : null;
 };
 
+const appBarHeightStyle = {minHeight: "64px"} as const
+
 export const MainAppBar = () => {
   const [foundLanguage, setFoundLanguage] = useState(getLanguage);
   const [foundSeparator, setFoundSeparator] = useState(getDecimalSeparator);
@@ -65,7 +67,7 @@ export const MainAppBar = () => {
           defaultValue={foundSeparator ?? fallbackSeparator}
         >
           <AppBar position="fixed">
-            <Toolbar>
+            <Toolbar sx={appBarHeightStyle}>
               <Box
                 sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}
               >
@@ -80,7 +82,7 @@ export const MainAppBar = () => {
           </AppBar>
           <Toolbar />
           <Outlet />
-          <SettingsDrawer open={settingsOpen} onClose={toggleDrawer} />
+          <SettingsDrawer open={settingsOpen} onClose={toggleDrawer} titleElementStyle={appBarHeightStyle} />
           <LanguageAlert
             open={!foundLanguage}
             onClose={() => setFoundLanguage(fallbackLanguage)}
