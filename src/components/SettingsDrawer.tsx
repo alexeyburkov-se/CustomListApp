@@ -42,11 +42,18 @@ import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   ".MuiDrawer-paper": {
-    borderRadius: "10px 0 0 10px",
     backgroundColor:
       theme.palette.mode == "light"
         ? "rgba(255, 255, 255, 0.8)"
         : "rgba(18, 18, 18, 0.8)",
+    [theme.breakpoints.up("xs")]: {
+      borderRadius: "0",
+      width: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      borderRadius: "10px 0 0 10px",
+      width: "auto",
+    },
   },
 }));
 
