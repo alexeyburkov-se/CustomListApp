@@ -80,7 +80,7 @@ export const MainAppBar = () => {
               </Box>
             </Toolbar>
           </AppBar>
-          <Toolbar />
+          <Toolbar  sx={appBarHeightStyle}/>
           <Outlet />
           <SettingsDrawer open={settingsOpen} onClose={toggleDrawer} titleElementStyle={appBarHeightStyle} />
           <LanguageAlert
