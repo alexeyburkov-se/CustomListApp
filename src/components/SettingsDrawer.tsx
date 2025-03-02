@@ -26,6 +26,7 @@ import {
   SelectProps,
   DrawerProps,
   IconButton,
+  Box,
 } from "@mui/material";
 import { useLanguage } from "../misc/contexts/languageContext";
 import {
@@ -48,11 +49,11 @@ const RightStyledDrawer = (props: Omit<DrawerProps, "anchor">) => (
   <StyledDrawer {...props} anchor="right" />
 );
 
-const RightAlignListItem = styled(ListItem)(() => ({
+const RightAlignBox = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
   flexDirection: "row",
-}));
+});
 
 const NoVerticalPaddingListItem = styled(ListItem)(() => ({
   paddingTop: "0",
@@ -147,18 +148,20 @@ export const SettingsDrawer = ({
             <Typography variant="overline">Language</Typography>
           </ListItemText>
         </NoVerticalPaddingListItem>
-        <RightAlignListItem>
-          <SmallSettingsSelect
-            inputProps={{ id: "appLanguage" }}
-            value={language}
-            onChange={(event: SelectChangeEvent<unknown>) => {
-              setLanguage(event.target.value as LanguageCode);
-            }}
-            sx={{ "& .MuiSelect-select": { display: "flex" } }}
-          >
-            {languageOptions}
-          </SmallSettingsSelect>
-        </RightAlignListItem>
+        <ListItem>
+          <RightAlignBox>
+            <SmallSettingsSelect
+              inputProps={{ id: "appLanguage" }}
+              value={language}
+              onChange={(event: SelectChangeEvent<unknown>) => {
+                setLanguage(event.target.value as LanguageCode);
+              }}
+              sx={{ "& .MuiSelect-select": { display: "flex" } }}
+            >
+              {languageOptions}
+            </SmallSettingsSelect>
+          </RightAlignBox>
+        </ListItem>
         <NoVerticalPaddingListItem>
           <ListItemIcon>
             <SvgIcon viewBox="0 0 128 128">
@@ -169,17 +172,19 @@ export const SettingsDrawer = ({
             <Typography variant="overline">Decimal separator</Typography>
           </ListItemText>
         </NoVerticalPaddingListItem>
-        <RightAlignListItem>
-          <SmallSettingsSelect
-            inputProps={{ id: "appDecimalSeparator" }}
-            value={separator}
-            onChange={(event: SelectChangeEvent<unknown>) => {
-              setSeparator(event.target.value as SeparatorType);
-            }}
-          >
-            {separatorOptions}
-          </SmallSettingsSelect>
-        </RightAlignListItem>
+        <ListItem>
+          <RightAlignBox>
+            <SmallSettingsSelect
+              inputProps={{ id: "appDecimalSeparator" }}
+              value={separator}
+              onChange={(event: SelectChangeEvent<unknown>) => {
+                setSeparator(event.target.value as SeparatorType);
+              }}
+            >
+              {separatorOptions}
+            </SmallSettingsSelect>
+          </RightAlignBox>
+        </ListItem>
         <NoVerticalPaddingListItem>
           <ListItemIcon>
             <Palette />
