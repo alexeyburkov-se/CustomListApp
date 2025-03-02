@@ -61,6 +61,7 @@ const SettingsList = styled(List)({
 const RightAlignBox = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
+  flex: 1,
   flexDirection: "row",
 });
 
