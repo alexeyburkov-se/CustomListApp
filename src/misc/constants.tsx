@@ -11,7 +11,10 @@ export const supportedSeparators = {
 
 export type SeparatorType = keyof typeof supportedSeparators;
 
-export const fallbackSeparator = "language" satisfies SeparatorType;
+export const separatorByLanguage = {
+  "en-US": "dot",
+  "ru-RU": "comma"
+} as const satisfies Record<LanguageCode, SeparatorType>;
 
 export const supportedLanguages = {
   "en-US": {

@@ -18,6 +18,7 @@ import {
   languageAlertDuration,
   LanguageCode,
   separatorAlertDuration,
+  separatorByLanguage,
   SeparatorType,
   supportedLanguages,
   supportedSeparators,
@@ -134,12 +135,15 @@ const BasePopper = ({
 
 export const LanguageAlert = ({
   open,
+  updateDecimalSeparator,
   onClose,
 }: {
   open: boolean;
+  updateDecimalSeparator: boolean,
   onClose: () => void;
 }) => {
   const [language, setLanguage] = useLanguage();
+  const [, setSeparator] = useDecimalSeparator();
 
   return (
     <BaseAlert
@@ -177,6 +181,9 @@ export const LanguageAlert = ({
               key={index}
               onClick={() => {
                 setLanguage(val[0]);
+                if (updateDecimalSeparator) {
+                  setSeparator(separatorByLanguage[val[0]])
+                }
                 onClose();
               }}
             >

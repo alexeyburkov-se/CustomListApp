@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import {
   fallbackLanguage,
-  fallbackSeparator,
   githubURL,
   LanguageCode,
   SeparatorType,
@@ -41,7 +40,9 @@ const getDecimalSeparator = (): SeparatorType | null => {
     : null;
 };
 
-const appBarHeightStyle = {minHeight: "64px"} as const
+const appBarHeightStyle = { minHeight: "64px" } as const;
+
+const fallbackSeparator = "dot";
 
 export const MainAppBar = () => {
   const [foundLanguage, setFoundLanguage] = useState(getLanguage);
@@ -80,11 +81,16 @@ export const MainAppBar = () => {
               </Box>
             </Toolbar>
           </AppBar>
-          <Toolbar  sx={appBarHeightStyle}/>
+          <Toolbar sx={appBarHeightStyle} />
           <Outlet />
-          <SettingsDrawer open={settingsOpen} onClose={toggleDrawer} titleElementStyle={appBarHeightStyle} />
+          <SettingsDrawer
+            open={settingsOpen}
+            onClose={toggleDrawer}
+            titleElementStyle={appBarHeightStyle}
+          />
           <LanguageAlert
             open={!foundLanguage}
+            updateDecimalSeparator={!foundSeparator}
             onClose={() => setFoundLanguage(fallbackLanguage)}
           />
           <DecimalSeparatorAlert
