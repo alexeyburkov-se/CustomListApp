@@ -52,7 +52,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
     },
     [theme.breakpoints.up("sm")]: {
       borderRadius: "10px 0 0 10px",
-      width: "auto",
+      width: "400px",
     },
   },
 }));
@@ -78,7 +78,8 @@ const NoVerticalPaddingListItem = styled(ListItem)({
 });
 
 const SettingsSelect = styled(Select)({
-  width: "205px",
+  width: "60%",
+  "& .MuiSelect-select": { display: "flex", alignItems: "center" },
 });
 
 const SmallSettingsSelect = (props: Omit<SelectProps, "size">) => {
@@ -104,6 +105,7 @@ const separatorOptions = (
   }[SeparatorType][]
 ).map((val, index) => (
   <MenuItem key={index} value={val[0]}>
+    <Typography sx={{flex: 1}}>{val[0]}:</Typography>
     {val[1]}
   </MenuItem>
 ));
@@ -175,7 +177,6 @@ export const SettingsDrawer = ({
               onChange={(event: SelectChangeEvent<unknown>) => {
                 setLanguage(event.target.value as LanguageCode);
               }}
-              sx={{ "& .MuiSelect-select": { display: "flex" } }}
             >
               {languageOptions}
             </SmallSettingsSelect>

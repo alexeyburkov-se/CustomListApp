@@ -1,12 +1,35 @@
 import USACountryFlag from "../assets/countries/usa.svg?react";
 import RussiaCountryFlag from "../assets/countries/ru.svg?react";
-import { SvgIcon } from "@mui/material";
+import { SvgIcon, Typography } from "@mui/material";
+
+const separatorStyle = {
+  fontSize: 30,
+  fontWeight: "bold",
+  lineHeight: 0,
+} as const;
 
 export const supportedSeparators = {
-  comma: "1234,5678",
-  dot: "1234.5678",
-  arabicComma: "1234٫5678",
-  language: "defined by language",
+  comma: (
+    <>
+      <Typography>123</Typography>
+      <Typography sx={separatorStyle}>,</Typography>
+      <Typography>456</Typography>
+    </>
+  ),
+  dot: (
+    <>
+      <Typography>123</Typography>
+      <Typography sx={separatorStyle}>.</Typography>
+      <Typography>456</Typography>
+    </>
+  ),
+  arabicComma: (
+    <>
+      <Typography>123</Typography>
+      <Typography sx={separatorStyle}>٫</Typography>
+      <Typography>456</Typography>
+    </>
+  ),
 } as const;
 
 export type SeparatorType = keyof typeof supportedSeparators;

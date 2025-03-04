@@ -13,6 +13,7 @@ import {
   Paper,
   Stack,
   Box,
+  Typography,
 } from "@mui/material";
 import {
   languageAlertDuration,
@@ -237,6 +238,7 @@ export const DecimalSeparatorAlert = ({
                 onClose();
               }}
             >
+              <Typography sx={{flex: 1}}>{val[0]}:&nbsp;</Typography>
               {val[1]}
             </MenuItem>
           ))}
