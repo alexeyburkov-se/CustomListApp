@@ -4,12 +4,14 @@ import { createSimpleStatefulContext } from "./simpleStatefulContext";
 export const separatorStorageKey = "decimalSeparator";
 
 const [p, u] = createSimpleStatefulContext<
-  [SeparatorType, (l: SeparatorType) => void],
+  [SeparatorType, (l: SeparatorType, cache?: boolean) => void],
   SeparatorType
->(["language", () => ({})], ([lang, set]) => [
+>(["dot", () => ({})], ([lang, set]) => [
   lang,
-  (l: SeparatorType) => {
-    localStorage.setItem(separatorStorageKey, l);
+  (l: SeparatorType, cache = true) => {
+    if (cache) {
+      localStorage.setItem(separatorStorageKey, l);
+    }
     set(l);
   },
 ]);

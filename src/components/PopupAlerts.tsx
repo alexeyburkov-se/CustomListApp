@@ -186,7 +186,7 @@ export const LanguageAlert = ({
               onClick={() => {
                 i18n.changeLanguage(val[0]);
                 if (updateDecimalSeparator) {
-                  setSeparator(separatorByLanguage[val[0]]);
+                  setSeparator(separatorByLanguage[val[0]], false);
                 }
                 onClose();
               }}
