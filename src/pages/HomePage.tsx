@@ -3,6 +3,7 @@ import { loadList } from "../loaders/mainLoader";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useListData } from "../misc/contexts/listDataContext";
+import { useTranslation } from "react-i18next";
 
 const hiddenStyle = {
   clipPath: "rect(0 0 0 0)",
@@ -14,6 +15,7 @@ export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const [, setListData] = useListData();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const loadProcedure = async (file?: File) => {
     setLoading(true);
@@ -30,9 +32,9 @@ export const HomePage = () => {
     <>Loading</>
   ) : (
     <div>
-      <Button onClick={async () => loadProcedure()}>New</Button>
+      <Button onClick={async () => loadProcedure()}>{t("home.new")}</Button>
       <Button component="label">
-        Load
+        {t("home.upload")}
         <input
           style={hiddenStyle}
           type="file"

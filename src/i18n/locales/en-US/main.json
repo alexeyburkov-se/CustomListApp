@@ -1,4 +1,7 @@
 {
+  "general": {
+    "github": "Github repository of application"
+  },
   "settings": {
     "title": "Settings",
     "language": "Language",
@@ -13,6 +16,24 @@
       "light": "Light",
       "system": "System",
       "dark": "Dark"
+    }
+  },
+  "home": {
+    "new": "New",
+    "upload": "Upload"
+  },
+  "alerts": {
+    "language": {
+      "title": "Language warning",
+      "description": "Application loaded with default language: ",
+      "primaryAction": "Use default",
+      "secondaryAction": "Change"
+    },
+    "separator": {
+      "title": "Decimal separator warning",
+      "description": "Application loaded with default decimal separator according to your preferred language",
+      "primaryAction": "Use default",
+      "secondaryAction": "Change"
     }
   }
 }

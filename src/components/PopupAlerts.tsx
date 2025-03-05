@@ -143,7 +143,7 @@ export const LanguageAlert = ({
   updateDecimalSeparator: boolean;
   onClose: () => void;
 }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [, setSeparator] = useDecimalSeparator();
 
   return (
@@ -151,8 +151,11 @@ export const LanguageAlert = ({
       open={open}
       onClose={onClose}
       duration={languageAlertDuration}
-      alertTitle="Language warning"
-      alertDescription="Application loaded with default language: English (USA)"
+      alertTitle={t("alerts.language.title")}
+      alertDescription={
+        t("alerts.language.description") +
+        supportedLanguages[i18n.language as LanguageCode].name
+      }
       Primary={
         <Button
           onClick={() => {
@@ -160,7 +163,7 @@ export const LanguageAlert = ({
             onClose();
           }}
         >
-          Use default
+          {t("alerts.language.primaryAction")}
         </Button>
       }
       Secondary={({ parentRef }: ParentRefParam) => (
@@ -169,7 +172,7 @@ export const LanguageAlert = ({
           actionElement={
             <>
               <Translate />
-              Change
+              {t("alerts.language.secondaryAction")}
             </>
           }
         >
@@ -205,6 +208,7 @@ export const DecimalSeparatorAlert = ({
   open: boolean;
   onClose: () => void;
 }) => {
+  const { t } = useTranslation();
   const [separator, setSeparator] = useDecimalSeparator();
 
   return (
@@ -212,8 +216,8 @@ export const DecimalSeparatorAlert = ({
       open={open}
       onClose={onClose}
       duration={separatorAlertDuration}
-      alertTitle="Decimal separator warning"
-      alertDescription="Application loaded with default decimal separator according to your preferred language"
+      alertTitle={t("alerts.separator.title")}
+      alertDescription={t("alerts.separator.description")}
       Primary={
         <Button
           onClick={() => {
@@ -221,11 +225,14 @@ export const DecimalSeparatorAlert = ({
             setSeparator(separator);
           }}
         >
-          Use default
+          {t("alerts.separator.primaryAction")}
         </Button>
       }
       Secondary={({ parentRef }: ParentRefParam) => (
-        <BasePopper parentRef={parentRef} actionElement={<>Change</>}>
+        <BasePopper
+          parentRef={parentRef}
+          actionElement={t("alerts.separator.secondaryAction")}
+        >
           {(
             Object.entries(supportedSeparators) as {
               [K in SeparatorType]: [K, (typeof supportedSeparators)[K]];
@@ -238,7 +245,9 @@ export const DecimalSeparatorAlert = ({
                 onClose();
               }}
             >
-              <Typography sx={{ flex: 1 }}>{val[0]}:&nbsp;</Typography>
+              <Typography sx={{ flex: 1 }}>
+                {t(`settings.separator.${val[0]}`)}:&nbsp;
+              </Typography>
               {val[1]}
             </MenuItem>
           ))}

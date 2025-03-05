@@ -30,5 +30,5 @@ i18next
   });
 
 if (!hasLanguage) {
-  window.localStorage.removeItem(languageStorageKey)
+  window.localStorage.removeItem(languageStorageKey);
 }

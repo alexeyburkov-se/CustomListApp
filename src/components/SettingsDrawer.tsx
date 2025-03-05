@@ -52,10 +52,14 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
     },
     [theme.breakpoints.up("sm")]: {
       borderRadius: "10px 0 0 10px",
-      width: "400px",
     },
   },
 }));
+
+const drawerWidths = {
+  "en-US": "420px",
+  "ru-RU": "510px",
+} as const satisfies Record<LanguageCode, string>;
 
 const RightStyledDrawer = (props: Omit<DrawerProps, "anchor">) => (
   <StyledDrawer {...props} anchor="right" />
@@ -95,44 +99,37 @@ const languageOptions = (
     <ListItemIcon sx={{ marginTop: "auto", marginBottom: "auto" }}>
       {val[1].icon}
     </ListItemIcon>
-    <ListItemText primary={val[1].name} />
-  </MenuItem>
-));
-
-const separatorOptions = (
-  Object.entries(supportedSeparators) as {
-    [K in SeparatorType]: [K, (typeof supportedSeparators)[K]];
-  }[SeparatorType][]
-).map((val, index) => (
-  <MenuItem key={index} value={val[0]}>
-    <Typography sx={{ flex: 1 }}>{val[0]}:</Typography>
-    {val[1]}
+    <ListItemText>{val[1].name}</ListItemText>
   </MenuItem>
 ));
 
 const ThemeButtonGroup = ({
   mode,
   setMode,
-}: Pick<ReturnType<typeof useColorScheme>, "mode" | "setMode">) => (
-  <ButtonGroup>
-    {(
-      [
-        { name: "light", icon: <Brightness7 /> },
-        { name: "system", icon: <SettingsBrightness /> },
-        { name: "dark", icon: <Brightness5 /> },
-      ] as const
-    ).map((val) => (
-      <Button
-        key={val.name}
-        onClick={() => setMode(val.name)}
-        variant={mode == val.name ? "contained" : "outlined"}
-      >
-        {val.icon}
-        <Typography>{val.name}</Typography>
-      </Button>
-    ))}
-  </ButtonGroup>
-);
+}: Pick<ReturnType<typeof useColorScheme>, "mode" | "setMode">) => {
+  const { t } = useTranslation();
+
+  return (
+    <ButtonGroup>
+      {(
+        [
+          { name: "light", icon: <Brightness7 /> },
+          { name: "system", icon: <SettingsBrightness /> },
+          { name: "dark", icon: <Brightness5 /> },
+        ] as const
+      ).map((val) => (
+        <Button
+          key={val.name}
+          onClick={() => setMode(val.name)}
+          variant={mode == val.name ? "contained" : "outlined"}
+        >
+          {val.icon}
+          <Typography>{t(`settings.theme.${val.name}`)}</Typography>
+        </Button>
+      ))}
+    </ButtonGroup>
+  );
+};
 
 export const SettingsDrawer = ({
   open,
@@ -143,18 +140,39 @@ export const SettingsDrawer = ({
   onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
   titleElementStyle: SxProps<Theme>;
 }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [separator, setSeparator] = useDecimalSeparator();
 
+  const separatorOptions = (
+    Object.entries(supportedSeparators) as {
+      [K in SeparatorType]: [K, (typeof supportedSeparators)[K]];
+    }[SeparatorType][]
+  ).map((val, index) => (
+    <MenuItem key={index} value={val[0]}>
+      <Typography sx={{ flex: 1 }}>
+        {t(`settings.separator.${val[0]}`)}:
+      </Typography>
+      {val[1]}
+    </MenuItem>
+  ));
+
   return (
-    <RightStyledDrawer open={open} onClose={onClose}>
+    <RightStyledDrawer
+      open={open}
+      onClose={onClose}
+      sx={{
+        ".MuiDrawer-paper": {
+          width: { sm: drawerWidths[i18n.language as LanguageCode] },
+        },
+      }}
+    >
       <SettingsList>
         <ListItem sx={titleElementStyle}>
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
           <ListItemText>
-            <Typography variant="h5">Settings</Typography>
+            <Typography variant="h5">{t("settings.title")}</Typography>
           </ListItemText>
           <IconButton onClick={onClose}>
             <Close />
@@ -166,7 +184,7 @@ export const SettingsDrawer = ({
             <Translate />
           </ListItemIcon>
           <ListItemText>
-            <Typography variant="overline">Language</Typography>
+            <Typography variant="overline">{t("settings.language")}</Typography>
           </ListItemText>
         </NoVerticalPaddingListItem>
         <ListItem>
@@ -189,7 +207,9 @@ export const SettingsDrawer = ({
             </SvgIcon>
           </ListItemIcon>
           <ListItemText>
-            <Typography variant="overline">Decimal separator</Typography>
+            <Typography variant="overline">
+              {t("settings.separator.title")}
+            </Typography>
           </ListItemText>
         </NoVerticalPaddingListItem>
         <ListItem>
@@ -210,7 +230,9 @@ export const SettingsDrawer = ({
             <Palette />
           </ListItemIcon>
           <ListItemText>
-            <Typography variant="overline">Theme</Typography>
+            <Typography variant="overline">
+              {t("settings.theme.title")}
+            </Typography>
           </ListItemText>
         </NoVerticalPaddingListItem>
         <ListItem
