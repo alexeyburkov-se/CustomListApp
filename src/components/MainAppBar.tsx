@@ -15,9 +15,10 @@ import {
   separatorStorageKey,
 } from "../misc/contexts/decimalSeparatorContext";
 import { DecimalSeparatorAlert, LanguageAlert } from "./PopupAlerts";
-import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar, Tooltip } from "@mui/material";
 import { GitHub, Settings } from "@mui/icons-material";
 import { SettingsDrawer } from "./SettingsDrawer";
+import { useTranslation } from "react-i18next";
 
 const getLanguage = (): LanguageCode | null => {
   const lang = localStorage.getItem(languageStorageKey);
@@ -46,6 +47,7 @@ export const MainAppBar = () => {
   const [foundSeparator, setFoundSeparator] = useState(getDecimalSeparator);
 
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -66,9 +68,11 @@ export const MainAppBar = () => {
         <AppBar position="fixed">
           <Toolbar sx={appBarHeightStyle}>
             <Box sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}>
-              <IconButton href={githubURL} target="_blank">
-                <GitHub />
-              </IconButton>
+              <Tooltip title={t("general.github")} placement="bottom">
+                <IconButton href={githubURL} target="_blank">
+                  <GitHub />
+                </IconButton>
+              </Tooltip>
               <IconButton onClick={toggleDrawer}>
                 <Settings />
               </IconButton>
