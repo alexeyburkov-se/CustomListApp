@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { languageStorageKey, supportedLanguages } from "../misc/constants";
 import englishUSA from "./locales/en-US/main.json";
-import russianRussia from "./locales/en-US/main.json";
+import russianRussia from "./locales/ru-RU/main.json";
 
 const hasLanguage = window.localStorage.getItem(languageStorageKey) != null;
 
