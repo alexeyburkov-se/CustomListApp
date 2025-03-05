@@ -3,14 +3,11 @@ import {
   fallbackLanguage,
   githubURL,
   LanguageCode,
+  languageStorageKey,
   SeparatorType,
   supportedLanguages,
   supportedSeparators,
 } from "../misc/constants";
-import {
-  LanguageProvider,
-  languageStorageKey,
-} from "../misc/contexts/languageContext";
 import { ListDataProvider } from "../misc/contexts/listDataContext";
 import { useState } from "react";
 import {
@@ -63,42 +60,38 @@ export const MainAppBar = () => {
 
   return (
     <ListDataProvider defaultValue={null}>
-      <LanguageProvider defaultValue={foundLanguage ?? fallbackLanguage}>
-        <DecimalSeparatorProvider
-          defaultValue={foundSeparator ?? fallbackSeparator}
-        >
-          <AppBar position="fixed">
-            <Toolbar sx={appBarHeightStyle}>
-              <Box
-                sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}
-              >
-                <IconButton href={githubURL} target="_blank">
-                  <GitHub />
-                </IconButton>
-                <IconButton onClick={toggleDrawer}>
-                  <Settings />
-                </IconButton>
-              </Box>
-            </Toolbar>
-          </AppBar>
-          <Toolbar sx={appBarHeightStyle} />
-          <Outlet />
-          <SettingsDrawer
-            open={settingsOpen}
-            onClose={toggleDrawer}
-            titleElementStyle={appBarHeightStyle}
-          />
-          <LanguageAlert
-            open={!foundLanguage}
-            updateDecimalSeparator={!foundSeparator}
-            onClose={() => setFoundLanguage(fallbackLanguage)}
-          />
-          <DecimalSeparatorAlert
-            open={!!foundLanguage && !foundSeparator}
-            onClose={() => setFoundSeparator(fallbackSeparator)}
-          />
-        </DecimalSeparatorProvider>
-      </LanguageProvider>
+      <DecimalSeparatorProvider
+        defaultValue={foundSeparator ?? fallbackSeparator}
+      >
+        <AppBar position="fixed">
+          <Toolbar sx={appBarHeightStyle}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}>
+              <IconButton href={githubURL} target="_blank">
+                <GitHub />
+              </IconButton>
+              <IconButton onClick={toggleDrawer}>
+                <Settings />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Toolbar sx={appBarHeightStyle} />
+        <Outlet />
+        <SettingsDrawer
+          open={settingsOpen}
+          onClose={toggleDrawer}
+          titleElementStyle={appBarHeightStyle}
+        />
+        <LanguageAlert
+          open={!foundLanguage}
+          updateDecimalSeparator={!foundSeparator}
+          onClose={() => setFoundLanguage(fallbackLanguage)}
+        />
+        <DecimalSeparatorAlert
+          open={!!foundLanguage && !foundSeparator}
+          onClose={() => setFoundSeparator(fallbackSeparator)}
+        />
+      </DecimalSeparatorProvider>
     </ListDataProvider>
   );
 };

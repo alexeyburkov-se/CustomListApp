@@ -3,6 +3,7 @@ import { ListPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
 import { MainAppBar } from "./components/MainAppBar";
 import { createTheme, ThemeProvider } from "@mui/material";
+import "./i18n/config";
 
 const mainRouter = createBrowserRouter([
   {

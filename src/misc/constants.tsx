@@ -36,7 +36,7 @@ export type SeparatorType = keyof typeof supportedSeparators;
 
 export const separatorByLanguage = {
   "en-US": "dot",
-  "ru-RU": "comma"
+  "ru-RU": "comma",
 } as const satisfies Record<LanguageCode, SeparatorType>;
 
 export const supportedLanguages = {
@@ -66,3 +66,5 @@ export const languageAlertDuration = 10000;
 export const separatorAlertDuration = 10000;
 
 export const githubURL = "https://github.com/alexeyburkov-se/CustomListApp";
+
+export const languageStorageKey = "language";

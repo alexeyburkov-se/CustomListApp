@@ -30,7 +30,6 @@ import {
   Theme,
   Box,
 } from "@mui/material";
-import { useLanguage } from "../misc/contexts/languageContext";
 import {
   LanguageCode,
   SeparatorType,
@@ -39,6 +38,7 @@ import {
 } from "../misc/constants";
 import DecimalSeparator from "../assets/decimalPoint.svg?react";
 import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
+import { useTranslation } from "react-i18next";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   ".MuiDrawer-paper": {
@@ -105,7 +105,7 @@ const separatorOptions = (
   }[SeparatorType][]
 ).map((val, index) => (
   <MenuItem key={index} value={val[0]}>
-    <Typography sx={{flex: 1}}>{val[0]}:</Typography>
+    <Typography sx={{ flex: 1 }}>{val[0]}:</Typography>
     {val[1]}
   </MenuItem>
 ));
@@ -143,7 +143,7 @@ export const SettingsDrawer = ({
   onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
   titleElementStyle: SxProps<Theme>;
 }) => {
-  const [language, setLanguage] = useLanguage();
+  const { i18n } = useTranslation();
   const [separator, setSeparator] = useDecimalSeparator();
 
   return (
@@ -173,9 +173,9 @@ export const SettingsDrawer = ({
           <RightAlignBox>
             <SmallSettingsSelect
               inputProps={{ id: "appLanguage" }}
-              value={language}
+              value={i18n.language}
               onChange={(event: SelectChangeEvent<unknown>) => {
-                setLanguage(event.target.value as LanguageCode);
+                i18n.changeLanguage(event.target.value as LanguageCode);
               }}
             >
               {languageOptions}

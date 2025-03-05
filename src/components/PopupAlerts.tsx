@@ -24,7 +24,6 @@ import {
   supportedLanguages,
   supportedSeparators,
 } from "../misc/constants";
-import { useLanguage } from "../misc/contexts/languageContext";
 import { useDecimalSeparator } from "../misc/contexts/decimalSeparatorContext";
 import {
   createRef,
@@ -34,6 +33,7 @@ import {
   RefObject,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ParentRefParam {
   parentRef: RefObject<HTMLElement>;
@@ -140,10 +140,10 @@ export const LanguageAlert = ({
   onClose,
 }: {
   open: boolean;
-  updateDecimalSeparator: boolean,
+  updateDecimalSeparator: boolean;
   onClose: () => void;
 }) => {
-  const [language, setLanguage] = useLanguage();
+  const { i18n } = useTranslation();
   const [, setSeparator] = useDecimalSeparator();
 
   return (
@@ -156,7 +156,7 @@ export const LanguageAlert = ({
       Primary={
         <Button
           onClick={() => {
-            setLanguage(language);
+            i18n.changeLanguage(i18n.language);
             onClose();
           }}
         >
@@ -181,9 +181,9 @@ export const LanguageAlert = ({
             <MenuItem
               key={index}
               onClick={() => {
-                setLanguage(val[0]);
+                i18n.changeLanguage(val[0]);
                 if (updateDecimalSeparator) {
-                  setSeparator(separatorByLanguage[val[0]])
+                  setSeparator(separatorByLanguage[val[0]]);
                 }
                 onClose();
               }}
@@ -238,7 +238,7 @@ export const DecimalSeparatorAlert = ({
                 onClose();
               }}
             >
-              <Typography sx={{flex: 1}}>{val[0]}:&nbsp;</Typography>
+              <Typography sx={{ flex: 1 }}>{val[0]}:&nbsp;</Typography>
               {val[1]}
             </MenuItem>
           ))}

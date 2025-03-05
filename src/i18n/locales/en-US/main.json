@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "separator": {
+      "title": "Decimal separator",
+      "dot": "Decimal dot",
+      "comma": "Decimal comma",
+      "arabicComma": "Arabic comma"
+    },
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "system": "System",
+      "dark": "Dark"
+    }
+  }
+}
