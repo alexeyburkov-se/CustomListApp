@@ -34,7 +34,7 @@ document.addEventListener("visibilitychange", () => {
   if (lang != null && !document.hidden) {
     i18next.changeLanguage();
   }
-})
+});
 
 if (!hasLanguage) {
   window.localStorage.removeItem(languageStorageKey);
