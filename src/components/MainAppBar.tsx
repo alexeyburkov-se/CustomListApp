@@ -9,10 +9,11 @@ import {
   supportedSeparators,
 } from "../misc/constants";
 import { ListDataProvider } from "../misc/contexts/listDataContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DecimalSeparatorProvider,
   separatorStorageKey,
+  useDecimalSeparator,
 } from "../misc/contexts/decimalSeparatorContext";
 import { DecimalSeparatorAlert, LanguageAlert } from "./PopupAlerts";
 import { AppBar, Box, IconButton, Toolbar, Tooltip } from "@mui/material";
@@ -42,6 +43,27 @@ const appBarHeightStyle = { minHeight: "64px" } as const;
 
 const fallbackSeparator = "dot";
 
+const VisibilityListeners = () => {
+  const [, set] = useDecimalSeparator();
+
+  useEffect(() => {
+    const updateSeparator = () => {
+      const sep = localStorage.getItem(separatorStorageKey);
+      if (sep != null && sep in supportedSeparators && !document.hidden) {
+        set(sep as SeparatorType);
+      }
+    };
+
+    document.addEventListener("visibilitychange", updateSeparator);
+
+    return () => {
+      document.removeEventListener("visibilitychange", updateSeparator);
+    };
+  });
+
+  return <></>;
+};
+
 export const MainAppBar = () => {
   const [foundLanguage, setFoundLanguage] = useState(getLanguage);
   const [foundSeparator, setFoundSeparator] = useState(getDecimalSeparator);
@@ -65,6 +87,7 @@ export const MainAppBar = () => {
       <DecimalSeparatorProvider
         defaultValue={foundSeparator ?? fallbackSeparator}
       >
+        <VisibilityListeners />
         <AppBar position="fixed">
           <Toolbar sx={appBarHeightStyle}>
             <Box sx={{ display: "flex", justifyContent: "flex-end", flex: 1 }}>

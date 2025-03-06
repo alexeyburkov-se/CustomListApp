@@ -159,7 +159,7 @@ export const LanguageAlert = ({
       Primary={
         <Button
           onClick={() => {
-            i18n.changeLanguage(i18n.language);
+            i18n.changeLanguage();
             onClose();
           }}
         >

@@ -29,6 +29,13 @@ i18next
     },
   });
 
+document.addEventListener("visibilitychange", () => {
+  const lang = window.localStorage.getItem(languageStorageKey);
+  if (lang != null && !document.hidden) {
+    i18next.changeLanguage();
+  }
+})
+
 if (!hasLanguage) {
   window.localStorage.removeItem(languageStorageKey);
 }
