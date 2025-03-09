@@ -2,7 +2,6 @@ import { createBrowserRouter, redirect, RouterProvider } from "react-router";
 import { ListPage } from "./pages/ListPage";
 import { HomePage } from "./pages/HomePage";
 import { MainAppBar } from "./components/MainAppBar";
-import { createTheme, ThemeProvider } from "@mui/material";
 import "./i18n/config";
 
 const mainRouter = createBrowserRouter([
@@ -27,16 +26,6 @@ const mainRouter = createBrowserRouter([
   },
 ]);
 
-const theme = createTheme({
-  colorSchemes: {
-    dark: true,
-  },
-});
-
-const App = () => (
-  <ThemeProvider theme={theme} noSsr defaultMode="system">
-    <RouterProvider router={mainRouter} />
-  </ThemeProvider>
-);
+const App = () => <RouterProvider router={mainRouter} />;
 
 export default App;
