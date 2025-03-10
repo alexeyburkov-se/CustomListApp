@@ -2,7 +2,7 @@ import { ListType } from "../../loaders/mainLoader";
 import { createSimpleStatefulContext } from "./simpleStatefulContext";
 
 const [p, u] = createSimpleStatefulContext<
-  [ListType | null, (d: ListType) => void, () => void],
+  [ListType | null, (d: ListType | null) => void, () => void],
   ListType | null
 >([null, () => ({}), () => ({})], ([data, set]) => [
   data,

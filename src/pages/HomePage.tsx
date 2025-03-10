@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { loadList } from "../loaders/mainLoader";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useListData } from "../misc/contexts/listDataContext";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,7 @@ const hiddenStyle = {
 
 export const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
-  const [listData, setListData] = useListData();
+  const [, setListData] = useListData();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -28,9 +28,11 @@ export const HomePage = () => {
     }
   };
 
-  return listData ? (
-    <Navigate to={"/list"} replace />
-  ) : isLoading ? (
+  useEffect(() => {
+    setListData(null);
+  }, [setListData]);
+
+  return isLoading ? (
     <>Loading</>
   ) : (
     <div>
