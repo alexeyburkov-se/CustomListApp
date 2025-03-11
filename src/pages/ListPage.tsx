@@ -19,6 +19,11 @@ const ListPageInternal = ({ data }: { data: ListType }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   return (
     <>
+      <Toolbar sx={{ justifyContent: "center" }}>
+        <Button>Save</Button>
+        <Button>Edit list</Button>
+        <Button>Close</Button>
+      </Toolbar>
       <Container>
         <form>
           <Stack spacing={3}>
