@@ -8,19 +8,18 @@ import { ItemPropertyComponent } from "./ItemPropertyComponent";
 // todo add hover animation for collapse
 
 export const ListItemComponent = ({
-  index,
-  data,
+  itemIndex,
   control,
 }: {
-  index: number;
-  data: ListType["main"][0];
+  itemIndex: number;
   control: Control<ListType>;
 }) => {
   const [expanded, setExpanded] = useState(false);
   const { fields } = useFieldArray({
-    name: `main.${index}.properties`,
+    name: `main.${itemIndex}.properties`,
     control,
   });
+
   return (
     <Paper elevation={3}>
       <Collapse
@@ -52,7 +51,7 @@ export const ListItemComponent = ({
               </Button>
             </Box>
           </Box>
-          {fields.map((field) => (
+          {fields.map((field, index) => (
             <ItemPropertyComponent
               key={field.id}
               data={field}
