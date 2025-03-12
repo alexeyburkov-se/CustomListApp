@@ -47,7 +47,10 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
           <Stack spacing={3}>
             <ListGeneralSettings />
             <Divider />
-            <ListGeneralComponent control={control} />
+            <ListGeneralComponent
+              control={control}
+              setHasUnsavedItems={setHasUnsavedItems}
+            />
           </Stack>
         </form>
       </Container>

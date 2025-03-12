@@ -1,10 +1,16 @@
 import { Control, useFieldArray } from "react-hook-form";
 import { ListItemComponent } from "./ListItemComponent";
 import { ListType } from "../loaders/mainLoader";
-import { Stack } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
+
+export interface ListGeneralComponentProps {
+  control: Control<ListType>;
+  setHasUnsavedItems: Dispatch<SetStateAction<boolean>>;
+}
 
 export const ListGeneralComponent = ({
   control,
+}: ListGeneralComponentProps) => {
 }: {
   control: Control<ListType>;
 }) => {
