@@ -34,6 +34,14 @@
       "description": "Application loaded with default decimal separator according to your preferred language",
       "primaryAction": "Use default",
       "secondaryAction": "Change"
+    },
+    "routeLeaving": {
+      "stayAction": "Go back",
+      "leaveAction": "Discard and continue",
+      "listPage": {
+        "title": "Are you sure you want to leave your list?",
+        "description": "There are unsaved changes in your list. Would you like to go back and save them or discard and leave anyway?"
+      }
     }
   }
 }
