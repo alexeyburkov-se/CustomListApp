@@ -9,7 +9,11 @@ import { useEffect, useState } from "react";
 import { LeaveRouteModalDialog } from "../components/LeaveRouteModalDilog";
 import { useTranslation } from "react-i18next";
 
-const ListPageInternal = ({ data }: { data: ListType }) => {
+interface ListPageInternalProps {
+  data: ListType;
+}
+
+const ListPageInternal = ({ data }: ListPageInternalProps) => {
   const { control, formState } = useForm<ListType>({
     defaultValues: data,
   });
