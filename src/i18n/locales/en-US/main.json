@@ -22,6 +22,11 @@
     "new": "New",
     "upload": "Upload"
   },
+  "listPage": {
+    "addItem": {
+      "title": "untitled"
+    }
+  },
   "alerts": {
     "language": {
       "title": "Language warning",

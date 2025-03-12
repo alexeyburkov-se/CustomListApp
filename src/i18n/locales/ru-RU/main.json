@@ -22,6 +22,11 @@
     "new": "Новый",
     "upload": "Загрузить"
   },
+  "listPage": {
+    "addItem": {
+      "title": "безымянный"
+    }
+  },
   "alerts": {
     "language": {
       "title": "Предупреждение о языке",
