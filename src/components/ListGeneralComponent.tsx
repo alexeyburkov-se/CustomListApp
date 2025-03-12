@@ -20,25 +20,23 @@ export const ListGeneralComponent = ({
   });
   const { t } = useTranslation();
 
+  const newItemData = {
+    properties: [
+      {
+        propertyName: "titleExample",
+        propertyType: "title" as const,
+        propertyValue: t("listPage.addItem.title"),
+      },
+    ],
+  };
+
   return (
     <Stack spacing={1}>
       {fields.map((field, index) => (
         <ListItemComponent key={field.id} control={control} itemIndex={index} />
       ))}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <IconButton
-          onClick={() => {
-            append({
-              properties: [
-                {
-                  propertyName: "titleExample",
-                  propertyType: "title",
-                  propertyValue: t("listPage.addItem.title"),
-                },
-              ],
-            });
-          }}
-        >
+        <IconButton onClick={() => append(newItemData)}>
           <Add />
         </IconButton>
       </Box>
