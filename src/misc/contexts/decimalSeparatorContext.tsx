@@ -36,7 +36,7 @@ const VisibilityListeners = () => {
     return () => {
       document.removeEventListener("visibilitychange", updateSeparator);
     };
-  });
+  }, [set]);
 
   return <></>;
 };
