@@ -131,15 +131,17 @@ const ThemeButtonGroup = ({
   );
 };
 
+export interface SettingsDrawerProps {
+  open: boolean;
+  onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  titleElementStyle: SxProps<Theme>;
+}
+
 export const SettingsDrawer = ({
   open,
   onClose,
   titleElementStyle,
-}: {
-  open: boolean;
-  onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
-  titleElementStyle: SxProps<Theme>;
-}) => {
+}: SettingsDrawerProps) => {
   const { t, i18n } = useTranslation();
   const [separator, setSeparator] = useDecimalSeparator();
 

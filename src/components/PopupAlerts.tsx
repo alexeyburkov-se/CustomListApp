@@ -47,6 +47,16 @@ const SlideTransition = (props: SlideProps) => (
   <Slide {...props} direction="up" />
 );
 
+interface BaseAlertProps {
+  open: boolean;
+  onClose: () => void;
+  duration: number | null;
+  alertTitle: string;
+  alertDescription: string;
+  Primary: ReactNode;
+  Secondary: FunctionComponent<ParentRefParam>;
+}
+
 const BaseAlert = ({
   open,
   onClose,
@@ -55,15 +65,7 @@ const BaseAlert = ({
   alertDescription,
   Primary,
   Secondary,
-}: {
-  open: boolean;
-  onClose: () => void;
-  duration: number | null;
-  alertTitle: string;
-  alertDescription: string;
-  Primary: ReactNode;
-  Secondary: FunctionComponent<ParentRefParam>;
-}) => {
+}: BaseAlertProps) => {
   const snackbarRef = createRef<HTMLElement>();
 
   const handleAlertClose = (
@@ -134,15 +136,17 @@ const BasePopper = ({
   );
 };
 
+export interface LanguageAlertProps {
+  open: boolean;
+  updateDecimalSeparator: boolean;
+  onClose: () => void;
+}
+
 export const LanguageAlert = ({
   open,
   updateDecimalSeparator,
   onClose,
-}: {
-  open: boolean;
-  updateDecimalSeparator: boolean;
-  onClose: () => void;
-}) => {
+}: LanguageAlertProps) => {
   const { t, i18n } = useTranslation();
   const [, setSeparator] = useDecimalSeparator();
 
@@ -201,13 +205,15 @@ export const LanguageAlert = ({
   );
 };
 
+export interface DecimalSeparatorAlertProps {
+  open: boolean;
+  onClose: () => void;
+}
+
 export const DecimalSeparatorAlert = ({
   open,
   onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) => {
+}: DecimalSeparatorAlertProps) => {
   const { t } = useTranslation();
   const [separator, setSeparator] = useDecimalSeparator();
 
