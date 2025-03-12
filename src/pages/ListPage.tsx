@@ -6,7 +6,7 @@ import { useListData } from "../misc/contexts/listDataContext";
 import { ListGeneralSettings } from "../components/ListGeneralSettings";
 import { ListGeneralComponent } from "../components/ListGeneralComponent";
 import { useEffect, useState } from "react";
-import { LeaveRouteModalDialog } from "../components/LeaveRouteModalDilog";
+import { LeaveRouteModalDialog } from "../components/LeaveRouteModalDialog";
 import { useTranslation } from "react-i18next";
 
 interface ListPageInternalProps {
