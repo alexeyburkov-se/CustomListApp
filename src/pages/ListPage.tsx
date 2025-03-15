@@ -39,7 +39,6 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
     <>
       <Toolbar sx={{ justifyContent: "center" }}>
         <Button>Save</Button>
-        <Button>Edit list</Button>
         <Button>Close</Button>
       </Toolbar>
       <Container>
