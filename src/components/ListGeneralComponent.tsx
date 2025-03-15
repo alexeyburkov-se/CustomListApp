@@ -5,6 +5,20 @@ import { Box, IconButton, Stack } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { Add } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+
+export const itemDragActivationDelayMS = 300;
+
+const sensorActivationConstraint = {
+  delay: itemDragActivationDelayMS,
+  tolerance: 5,
+} as const;
 
 export interface ListGeneralComponentProps {
   control: Control<ListType>;
@@ -30,16 +44,30 @@ export const ListGeneralComponent = ({
     ],
   };
 
+  const sensorM = useSensor(MouseSensor, {
+    activationConstraint: sensorActivationConstraint,
+  });
+
+  const sensorT = useSensor(TouchSensor, {
+    activationConstraint: sensorActivationConstraint,
+  });
+
   return (
-    <Stack spacing={1}>
-      {fields.map((field, index) => (
-        <ListItemComponent key={field.id} control={control} itemIndex={index} />
-      ))}
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <IconButton onClick={() => append(newItemData)}>
-          <Add />
-        </IconButton>
-      </Box>
-    </Stack>
+    <DndContext sensors={useSensors(sensorM, sensorT)}>
+      <Stack spacing={1}>
+        {fields.map((field, index) => (
+          <ListItemComponent
+            key={field.id}
+            control={control}
+            itemIndex={index}
+          />
+        ))}
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <IconButton size="large" onClick={() => append(newItemData)}>
+            <Add fontSize="large" />
+          </IconButton>
+        </Box>
+      </Stack>
+    </DndContext>
   );
 };
