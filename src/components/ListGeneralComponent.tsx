@@ -13,12 +13,14 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 
-export const itemDragActivationDelayMS = 300;
+export const itemDragActivationDelayMS = 500;
 
 const sensorActivationConstraint = {
   delay: itemDragActivationDelayMS,
   tolerance: 5,
 } as const;
+
+const itemsZIndex = 1;
 
 export interface ListGeneralComponentProps {
   control: Control<ListType>;
@@ -60,9 +62,10 @@ export const ListGeneralComponent = ({
             key={field.id}
             control={control}
             itemIndex={index}
+            zIndex={itemsZIndex}
           />
         ))}
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", zIndex: itemsZIndex }}>
           <IconButton size="large" onClick={() => append(newItemData)}>
             <Add fontSize="large" />
           </IconButton>
