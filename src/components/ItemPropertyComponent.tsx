@@ -1,57 +1,25 @@
-import { Control } from "react-hook-form";
+import { useController, UseControllerProps } from "react-hook-form";
 import { ListType } from "../loaders/mainLoader";
 import { TextPropertyComponent } from "./ItemPropertyVariants/TextPropertyComponent";
 import { CheckBoxPropertyComponent } from "./ItemPropertyVariants/CheckBoxPropertyComponent";
 
-export const ItemPropertyComponent = ({
-  data,
-  control,
-}: {
-  data: ListType["main"][0]["properties"][0];
-  control: Control<ListType>;
-}) => {
-  switch (data.propertyType) {
+export const ItemPropertyComponent = (
+  props: UseControllerProps<ListType, `main.${number}.properties.${number}`>,
+) => {
+  const c = useController(props);
+
+  switch (c.field.value.propertyType) {
     case "text":
-      return (
-        <TextPropertyComponent
-          value={data.propertyValue}
-          name={data.propertyName}
-        />
-      );
+      return <TextPropertyComponent {...props} />;
     case "label":
-      return (
-        <TextPropertyComponent
-          value={data.propertyValue}
-          name={data.propertyName}
-        />
-      );
+      return <TextPropertyComponent {...props} />;
     case "title":
-      return (
-        <TextPropertyComponent
-          value={data.propertyValue}
-          name={data.propertyName}
-        />
-      );
+      return <TextPropertyComponent {...props} />;
     case "checkBox":
-      return (
-        <CheckBoxPropertyComponent
-          value={data.propertyValue}
-          name={data.propertyName}
-        />
-      );
+      return <CheckBoxPropertyComponent {...props} />;
     case "rating":
-      return (
-        <TextPropertyComponent
-          value={data.propertyValue}
-          name={data.propertyName}
-        />
-      );
+      return <TextPropertyComponent {...props} />;
     case "ratingRatio":
-      return (
-        <TextPropertyComponent
-          value={`${data.propertyValue[0]}/${data.propertyValue[1]}`}
-          name={data.propertyName}
-        />
-      );
+      return <TextPropertyComponent {...props} />;
   }
 };
