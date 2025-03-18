@@ -1,5 +1,5 @@
 import { useController, UseControllerProps } from "react-hook-form";
-import { ListType } from "../loaders/mainLoader";
+import { ListType } from "../../loaders/mainLoader";
 import { TextPropertyComponent } from "./ItemPropertyVariants/TextPropertyComponent";
 import { CheckBoxPropertyComponent } from "./ItemPropertyVariants/CheckBoxPropertyComponent";
 

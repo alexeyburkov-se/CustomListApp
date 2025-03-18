@@ -1,6 +1,6 @@
 import { Control, useFieldArray } from "react-hook-form";
 import { ListItemComponent } from "./ListItemComponent";
-import { ListType } from "../loaders/mainLoader";
+import { ListType } from "../../loaders/mainLoader";
 import { Box, IconButton, Stack } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { Add } from "@mui/icons-material";

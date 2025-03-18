@@ -1,6 +1,6 @@
 import { Box, Checkbox } from "@mui/material";
 import { useController, UseControllerProps } from "react-hook-form";
-import { ListType } from "../../loaders/mainLoader";
+import { ListType } from "../../../loaders/mainLoader";
 
 export const CheckBoxPropertyComponent = (
   props: UseControllerProps<ListType, `main.${number}.properties.${number}`>,
