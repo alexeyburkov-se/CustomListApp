@@ -5,6 +5,8 @@ import { useState } from "react";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { ItemPropertyComponent } from "./ItemPropertyComponent";
 import { useDraggable } from "@dnd-kit/core";
+import { ListItemPaper } from "./ListItemPaper";
+import { itemDragActivationDelayMS } from "./ListGeneralComponent";
 // todo add darkening of content
 // todo add hover animation for collapse
 // todo sync transition times
@@ -56,7 +58,7 @@ export const ListItemComponent = ({
         },
       ]}
     >
-      <ListItemPaper isDragging={isDragging}>
+      <ListItemPaper isDragging={isDragging} isDragMode={dragMode} animationDurationMS={itemDragActivationDelayMS} animationEndDurationMS={300}>
         <Collapse
           in={expanded}
           collapsedSize={"3em"}
