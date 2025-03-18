@@ -122,11 +122,10 @@ export const ListItemPaper = ({
       ref={paperRef}
       elevation={3}
       sx={[
-        isDragMode &&
-          isDragging && {
-            transform: "scale(1.03, 1.03)",
-            transition: `transform ${animationDurations.animationEndDurationMS}ms`,
-          },
+        isDragging && {
+          transform: "scale(1.03, 1.03)",
+          transition: `transform ${animationDurations.animationEndDurationMS}ms`,
+        },
         {
           position: "relative",
           overflow: "hidden",
