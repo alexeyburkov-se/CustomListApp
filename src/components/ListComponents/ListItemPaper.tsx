@@ -125,7 +125,7 @@ export const ListItemPaper = ({
         isDragMode &&
           isDragging && {
             transform: "scale(1.03, 1.03)",
-            transition: "transform 300ms",
+            transition: `transform ${animationDurations.animationEndDurationMS}ms`,
           },
         {
           position: "relative",
