@@ -37,7 +37,7 @@ const AnimatedCircleProgress = ({
 }: AnimatedCircleProgressProps) => {
   const whenChangeAnimation =
     (
-      animationDurationMS /
+      (100 * animationDurationMS) /
       (animationDurationMS + animationEndDurationMS)
     ).toFixed(1) + "%";
 
