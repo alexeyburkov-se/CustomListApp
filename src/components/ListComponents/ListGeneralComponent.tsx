@@ -1,4 +1,4 @@
-import { Control, useFieldArray } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { ListItemComponent } from "./ListItemComponent";
 import { ListType } from "../../loaders/mainLoader";
 import { Box, IconButton, Stack } from "@mui/material";
@@ -23,15 +23,16 @@ const sensorActivationConstraint = {
 const itemsZIndex = 1;
 
 export interface ListGeneralComponentProps {
-  control: Control<ListType>;
+  data: ListType["main"];
   setHasUnsavedItems: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ListGeneralComponent = ({
-  control,
-}: ListGeneralComponentProps) => {
+export const ListGeneralComponent = ({ data }: ListGeneralComponentProps) => {
+  const { control } = useForm({
+    defaultValues: { data: data },
+  });
   const { fields, append } = useFieldArray({
-    name: "main",
+    name: "data",
     control: control,
   });
   const { t } = useTranslation();
