@@ -24,7 +24,7 @@ const itemsZIndex = 1;
 
 export interface ListGeneralComponentProps {
   data: ListType["main"];
-  setHasUnsavedItems: Dispatch<SetStateAction<boolean>>;
+  setUnsavedItemsStatus: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ListGeneralComponent = ({ data }: ListGeneralComponentProps) => {

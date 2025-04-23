@@ -48,7 +48,7 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
             <Divider />
             <ListGeneralComponent
               data={getValues().main}
-              setHasUnsavedItems={setHasUnsavedItems}
+              setUnsavedItemsStatus={setHasUnsavedItems}
             />
           </Stack>
         </form>
