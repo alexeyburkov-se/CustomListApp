@@ -12,8 +12,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-
-export const itemDragActivationDelayMS = 500;
+import { itemDragActivationDelayMS } from "../../misc/constants";
 
 const sensorActivationConstraint = {
   delay: itemDragActivationDelayMS,

@@ -68,3 +68,5 @@ export const separatorAlertDuration = 10000;
 export const githubURL = "https://github.com/alexeyburkov-se/CustomListApp";
 
 export const languageStorageKey = "language";
+
+export const itemDragActivationDelayMS = 500;

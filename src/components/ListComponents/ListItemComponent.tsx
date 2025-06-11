@@ -6,7 +6,7 @@ import { KeyboardArrowDown } from "@mui/icons-material";
 import { ItemPropertyComponent } from "./ItemPropertyComponent";
 import { useDraggable } from "@dnd-kit/core";
 import { ListItemPaper } from "./ListItemPaper";
-import { itemDragActivationDelayMS } from "./ListGeneralComponent";
+import { itemDragActivationDelayMS } from "../../misc/constants";
 // todo add darkening of content
 // todo add hover animation for collapse
 // todo sync transition times
