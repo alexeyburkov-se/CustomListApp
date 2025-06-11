@@ -31,6 +31,7 @@ export interface ListGeneralComponentProps {
 export const ListGeneralComponent = ({
   data,
   updateData,
+  setUnsavedItemsStatus,
 }: ListGeneralComponentProps) => {
   const { control, handleSubmit, formState } = useForm({
     defaultValues: { data: data },
@@ -64,6 +65,11 @@ export const ListGeneralComponent = ({
     setUnsavedItemsStatus(false);
   });
 
+  const onAddNew = () => {
+    append(newItemData);
+    setUnsavedItemsStatus(true);
+  };
+
   return (
     <DndContext sensors={useSensors(sensorM, sensorT)}>
       <Stack spacing={1}>
@@ -83,8 +89,15 @@ export const ListGeneralComponent = ({
             zIndex={itemsZIndex}
           />
         ))}
-        <Box sx={{ display: "flex", justifyContent: "center", zIndex: itemsZIndex }}>
-          <IconButton size="large" onClick={() => append(newItemData)}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            zIndex: itemsZIndex,
+          }}
+        >
+          <IconButton size="large" onClick={onAddNew}>
+            {/* Add templates */}
             <Add fontSize="large" />
           </IconButton>
         </Box>
