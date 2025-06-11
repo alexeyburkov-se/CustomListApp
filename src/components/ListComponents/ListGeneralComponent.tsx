@@ -1,7 +1,7 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { ListItemComponent } from "./ListItemComponent";
 import { ListType } from "../../loaders/mainLoader";
-import { Box, IconButton, Stack } from "@mui/material";
+import { Box, Button, IconButton, Stack } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { Add } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
@@ -24,11 +24,15 @@ const itemsZIndex = 1;
 
 export interface ListGeneralComponentProps {
   data: ListType["main"];
+  updateData: (data: ListType["main"]) => void;
   setUnsavedItemsStatus: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ListGeneralComponent = ({ data }: ListGeneralComponentProps) => {
-  const { control } = useForm({
+export const ListGeneralComponent = ({
+  data,
+  updateData,
+}: ListGeneralComponentProps) => {
+  const { control, handleSubmit, formState } = useForm({
     defaultValues: { data: data },
   });
   const { fields, append } = useFieldArray({
@@ -55,9 +59,22 @@ export const ListGeneralComponent = ({ data }: ListGeneralComponentProps) => {
     activationConstraint: sensorActivationConstraint,
   });
 
+  const onSave = handleSubmit((data) => {
+    updateData(data.data);
+    setUnsavedItemsStatus(false);
+  });
+
   return (
     <DndContext sensors={useSensors(sensorM, sensorT)}>
       <Stack spacing={1}>
+        <Box>
+          <Button
+            sx={[formState.isDirty || { display: "none" }]}
+            onClick={onSave}
+          >
+            {t("listPage.saveChanges")}
+          </Button>
+        </Box>
         {fields.map((field, index) => (
           <ListItemComponent
             key={field.id}

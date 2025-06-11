@@ -25,7 +25,8 @@
   "listPage": {
     "addItem": {
       "title": "untitled"
-    }
+    },
+    "saveChanges": "Save"
   },
   "alerts": {
     "language": {

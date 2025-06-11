@@ -25,7 +25,8 @@
   "listPage": {
     "addItem": {
       "title": "безымянный"
-    }
+    },
+    "saveChanges": "Сохранить"
   },
   "alerts": {
     "language": {

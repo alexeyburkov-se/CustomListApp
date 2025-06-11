@@ -14,7 +14,7 @@ interface ListPageInternalProps {
 }
 
 const ListPageInternal = ({ data }: ListPageInternalProps) => {
-  const { formState, getValues } = useForm<ListType>({
+  const { formState, getValues, setValue } = useForm<ListType>({
     defaultValues: data,
   });
   const { t } = useTranslation();
@@ -49,6 +49,9 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
             <ListGeneralComponent
               data={getValues().main}
               setUnsavedItemsStatus={setHasUnsavedItems}
+              updateData={(data) =>
+                setValue("main", data, { shouldDirty: true })
+              }
             />
           </Stack>
         </form>
