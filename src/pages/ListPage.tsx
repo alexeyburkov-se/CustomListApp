@@ -19,11 +19,14 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
   });
   const { t } = useTranslation();
   const [hasUnsavedItems, setHasUnsavedItems] = useState(false);
+  const [hasUnsavedSettings, setHasUnsavedSettings] = useState(false);
   const [, setListData] = useListData();
+
+  const isDirty = formState.isDirty || hasUnsavedItems || hasUnsavedSettings;
 
   useEffect(() => {
     const handler =
-      formState.isDirty || hasUnsavedItems
+      isDirty
         ? (event: BeforeUnloadEvent) => event.preventDefault()
         : () => ({});
 
@@ -32,9 +35,9 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
     return () => {
       window.removeEventListener("beforeunload", handler);
     };
-  }, [hasUnsavedItems, formState]);
+  }, [isDirty]);
 
-  const blocker = useBlocker(formState.isDirty || hasUnsavedItems);
+  const blocker = useBlocker(isDirty);
 
   return (
     <>
