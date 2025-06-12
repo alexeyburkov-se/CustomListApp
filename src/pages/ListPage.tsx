@@ -19,6 +19,7 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
   });
   const { t } = useTranslation();
   const [hasUnsavedItems, setHasUnsavedItems] = useState(false);
+  const [, setListData] = useListData();
 
   useEffect(() => {
     const handler =
@@ -38,8 +39,8 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
   return (
     <>
       <Toolbar sx={{ justifyContent: "center" }}>
-        <Button>Save</Button>
-        <Button>Close</Button>
+        <Button>Save list</Button>
+        <Button>Close list</Button>
       </Toolbar>
       <Container>
         <form>
@@ -59,7 +60,10 @@ const ListPageInternal = ({ data }: ListPageInternalProps) => {
       <LeaveRouteModalDialog
         open={blocker.state == "blocked"}
         stayAction={blocker.reset!}
-        leaveAction={blocker.proceed!}
+        leaveAction={() => {
+          setListData(null);
+          blocker.proceed!();
+        }}
         title={t("alerts.routeLeaving.listPage.title")}
         description={t("alerts.routeLeaving.listPage.description")}
       />

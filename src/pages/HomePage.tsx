@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { loadList } from "../loaders/mainLoader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useListData } from "../misc/contexts/listDataContext";
 import { useTranslation } from "react-i18next";
@@ -22,10 +22,6 @@ export const HomePage = () => {
       // todo show message on error
     }
   };
-
-  useEffect(() => {
-    setListData(null);
-  }, [setListData]);
 
   return isLoading ? (
     <>Loading</>
