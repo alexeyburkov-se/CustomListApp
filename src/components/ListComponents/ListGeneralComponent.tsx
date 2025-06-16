@@ -73,6 +73,7 @@ export const ListGeneralComponent = ({
   const onSave = handleSubmit((data) => {
     updateData(data.data);
     setUnsavedItemsStatus(false);
+    // todo reset dirty status here
   });
 
   const onAddNew = () => {
@@ -86,7 +87,11 @@ export const ListGeneralComponent = ({
       <Stack spacing={1}>
         <Box>
           <Button
-            sx={[childrenItemsIsDirty || { display: "none" }]}
+            sx={[
+              (formState.isDirty && !childrenItemsIsDirty) || {
+                display: "none",
+              },
+            ]}
             onClick={onSave}
           >
             {t("listPage.saveChanges")}
