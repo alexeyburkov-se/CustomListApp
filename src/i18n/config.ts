@@ -29,6 +29,8 @@ i18next
     },
   });
 
+export const i18nextInstance = i18next;
+
 document.addEventListener("visibilitychange", () => {
   const lang = window.localStorage.getItem(languageStorageKey);
   if (lang != null && !document.hidden) {

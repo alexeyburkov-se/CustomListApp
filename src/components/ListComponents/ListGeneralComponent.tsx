@@ -13,6 +13,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { itemDragActivationDelayMS } from "../../misc/constants";
+import { i18nextInstance } from "../../i18n/config";
 
 const sensorActivationConstraint = {
   delay: itemDragActivationDelayMS,
@@ -20,6 +21,16 @@ const sensorActivationConstraint = {
 } as const;
 
 const itemsZIndex = 1;
+
+const newItemData = {
+  properties: [
+    {
+      propertyName: "titleExample",
+      propertyType: "title" as const,
+      propertyValue: i18nextInstance.t("listPage.addItem.title"),
+    },
+  ],
+};
 
 export interface ListGeneralComponentProps {
   data: ListType["main"];
@@ -51,16 +62,6 @@ export const ListGeneralComponent = ({
 
   const isDirty = formState.isDirty || childrenItemsIsDirty;
 
-  const newItemData = {
-    properties: [
-      {
-        propertyName: "titleExample",
-        propertyType: "title" as const,
-        propertyValue: t("listPage.addItem.title"),
-      },
-    ],
-  };
-
   const sensorM = useSensor(MouseSensor, {
     activationConstraint: sensorActivationConstraint,
   });
@@ -84,7 +85,10 @@ export const ListGeneralComponent = ({
     <DndContext sensors={useSensors(sensorM, sensorT)}>
       <Stack spacing={1}>
         <Box>
-          <Button sx={[childrenItemsIsDirty || { display: "none" }]} onClick={onSave}>
+          <Button
+            sx={[childrenItemsIsDirty || { display: "none" }]}
+            onClick={onSave}
+          >
             {t("listPage.saveChanges")}
           </Button>
         </Box>
